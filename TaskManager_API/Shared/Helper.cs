@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using TaskManager_Entity;
 
 namespace Taskmanager_API.Shared
 {
@@ -23,11 +24,8 @@ namespace Taskmanager_API.Shared
         public DatabaseConnection GetConnection(IConfiguration configuration, string ApplicationName)
         {
             DatabaseConnection objDatabaseConnection = new DatabaseConnection();
-            if (ApplicationName == Constant.Admin)
-            {
                 objDatabaseConnection.ApplicationName = ApplicationName;
-                objDatabaseConnection.ConnectionString = configuration.GetSection("ConnectionStrings").GetSection("AdaniICMAdminConnection").Value;
-            }
+                objDatabaseConnection.ConnectionString = configuration.GetSection("ConnectionStrings").GetSection("TaskManagerConnection").Value;
             return objDatabaseConnection;
         }
 
