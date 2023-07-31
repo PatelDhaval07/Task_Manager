@@ -1,6 +1,6 @@
 using System;
 
-namespace Taskmanager_API
+namespace TaskManager_API
 {
     public class WeatherForecast
     {
