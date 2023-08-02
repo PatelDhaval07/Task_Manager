@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using TaskManager_DAL.Services.Authentication;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using TaskManager_DAL.Services.CommonService;
 
 namespace TaskManager_API
 {
@@ -45,6 +46,7 @@ namespace TaskManager_API
 
             //Register our interface and implemenation
             services.AddTransient<IAuthenticationService, AuthenticationService>();
+            services.AddTransient<ICommonService, CommonService>();
 
             //JWT Bearer
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
