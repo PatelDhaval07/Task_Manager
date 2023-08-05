@@ -7,7 +7,7 @@ namespace TaskManager_Utility.Constant
     public class Common
     {
         public const string NoDataFound = "No data found.";
-        public const string AlreadyExistEmail = "Email id already exist";
+        public const string AlreadyExistEmail = "Email id already exist ";
 
         #region  login
         public const string SomethingWentWrong = "Something went wrong!";
@@ -19,6 +19,8 @@ namespace TaskManager_Utility.Constant
             "You have no project assigned, please contact to admin for more details!";
         public const string FailedToRegister = "Failed to register";
         public const string RegisterSuccessfully = "User registered successfully";
+        public const string EmailSentSuccessfully = "Email sent successfully";
+        public const string FailtoSendEmail = "Fail to send email";
         #endregion
     }
 }

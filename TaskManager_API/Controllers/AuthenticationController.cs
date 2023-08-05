@@ -54,6 +54,14 @@ namespace TaskManager_API.Controllers
             return await _authenticationService.Register(user);
         }
 
+        [Route("Test")]
+        [HttpGet]
+        [Authorize]
+        public async Task<object> Test()
+        {
+            return null;
+        }
+
         #endregion
     }
 }

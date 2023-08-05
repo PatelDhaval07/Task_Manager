@@ -12,10 +12,10 @@ namespace TaskManager_Data.Entities
 
     public class LoginResponse
     {
-        //public string jwtToken { get; set; }
+        public string jwtToken { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        //public string refreshToken { get; set; }
+        public string refreshToken { get; set; }
         public string UserId { get; set; }
         public string RoleId { get; set; }
         //public List<TMSMenuRolePermission> TMSMenuRolePermission { get; set; }

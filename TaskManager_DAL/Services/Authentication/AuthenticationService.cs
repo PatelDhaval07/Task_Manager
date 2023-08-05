@@ -14,6 +14,9 @@ using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography;
 using System.Globalization;
+using TaskManager_DAL.Services.CommonService;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace TaskManager_DAL.Services.Authentication
 {
@@ -22,13 +25,16 @@ namespace TaskManager_DAL.Services.Authentication
         #region Fields
         private readonly ILogger _logger;
         private readonly IConfiguration _configuration;
+        private readonly ICommonService _iCommonService;
+        private readonly IHostingEnvironment _IHostingEnvironment;
         #endregion
 
-        public AuthenticationService(ILogger<AuthenticationService> logger,
-            IConfiguration configuration)
+        public AuthenticationService(ILogger<AuthenticationService> logger, IConfiguration configuration, ICommonService commonService, IHostingEnvironment hostingEnvironment)
         {
             _logger = logger;
             _configuration = configuration;
+            _iCommonService = commonService;
+            _IHostingEnvironment = hostingEnvironment;
         }
 
         #region Methods
@@ -95,7 +101,7 @@ namespace TaskManager_DAL.Services.Authentication
                         loginResponse.LastName = userDTO.LastName;
                         loginResponse.UserId = userDTO.UserId.ToString();
                         loginResponse.RoleId = userDTO.RoleId.ToString();
-                        //loginResponse.refreshToken = GenerateRefreshToken();
+                        loginResponse.refreshToken = GenerateRefreshToken();
 
                         //loginResponse.jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
 
@@ -115,14 +121,14 @@ namespace TaskManager_DAL.Services.Authentication
         {
             try
             {
-                user.Password =
+                string password =
                     CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(
                         DateTime.UtcNow.Month
                     )
                     + "@"
                     + DateTime.UtcNow.Year
                     + "#";
-                user.Password = PasswordHashUtil.HashPassword(user.Password);
+                user.Password = PasswordHashUtil.HashPassword(password);
 
                 user.Email = user.Email;
 
@@ -143,15 +149,28 @@ namespace TaskManager_DAL.Services.Authentication
 
                 if (response != null && response.Tables != null && response.Tables[0] != null)
                 {
-                    if (
-                        response.Tables[0].Rows.Count > 0
-                        && (int)response.Tables[0].Rows[0][0] < 0
-                    )
-                        return StatusBuilder.ResponseFailStatus(Common.FailedToRegister);
+                    if (response.Tables[0].Rows.Count > 0 && (int)response.Tables[0].Rows[0][0] < 0)
+                        return StatusBuilder.ResponseFailStatus(Common.AlreadyExistEmail);
+                    else
+                    {
+                        // send new assigned mail
+                        Dictionary<string, string> replacement = new Dictionary<string, string>();
+                        replacement.Add("${{UserName}}$", user.FirstName + " " + user.LastName);
+                        replacement.Add("${{Password}}$", password);
+                        replacement.Add("${{UserEmail}}$", user.Email);
+                        replacement.Add("${{URL}}$", _configuration.GetSection("Origins").GetSection("UrlStagingUI").Value);
+
+                        string newPath = Path.Combine(_IHostingEnvironment.ContentRootPath, "ExternalFiles", "Templates", "WelcomeMail.html");
+                        if (File.Exists(newPath))
+                        {
+                            string finaleTemplate = File.ReadAllText(newPath);
+                            _iCommonService.SendEmail(finaleTemplate, replacement, "Welcome to Task Manager", user.Email, null);
+                        }
+                        return StatusBuilder.ResponseSuccessStatus(Common.RegisterSuccessfully);
+                    }
                 }
                 else
                     return StatusBuilder.ResponseFailStatus(Common.FailedToRegister);
-                return StatusBuilder.ResponseSuccessStatus(Common.RegisterSuccessfully);
             }
             catch (System.Exception ex)
             {
