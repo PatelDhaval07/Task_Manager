@@ -2438,11 +2438,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "e:\\Dhaval Projects\\Task_Manager\\TaskManager_DAL\\TaskManager_DAL.csproj",
+      "projectUniqueName": "E:\\Dhaval Projects\\Task_Manager\\TaskManager_DAL\\TaskManager_DAL.csproj",
       "projectName": "TaskManager_DAL",
-      "projectPath": "e:\\Dhaval Projects\\Task_Manager\\TaskManager_DAL\\TaskManager_DAL.csproj",
+      "projectPath": "E:\\Dhaval Projects\\Task_Manager\\TaskManager_DAL\\TaskManager_DAL.csproj",
       "packagesPath": "C:\\Users\\Dhaval Patel\\.nuget\\packages\\",
-      "outputPath": "e:\\Dhaval Projects\\Task_Manager\\TaskManager_DAL\\obj\\",
+      "outputPath": "E:\\Dhaval Projects\\Task_Manager\\TaskManager_DAL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2463,11 +2463,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "e:\\Dhaval Projects\\Task_Manager\\TaskManager_Data\\TaskManager_Data.csproj": {
-              "projectPath": "e:\\Dhaval Projects\\Task_Manager\\TaskManager_Data\\TaskManager_Data.csproj"
+            "E:\\Dhaval Projects\\Task_Manager\\TaskManager_Data\\TaskManager_Data.csproj": {
+              "projectPath": "E:\\Dhaval Projects\\Task_Manager\\TaskManager_Data\\TaskManager_Data.csproj"
             },
-            "e:\\Dhaval Projects\\Task_Manager\\TaskManager_Utility\\TaskManager_Utility.csproj": {
-              "projectPath": "e:\\Dhaval Projects\\Task_Manager\\TaskManager_Utility\\TaskManager_Utility.csproj"
+            "E:\\Dhaval Projects\\Task_Manager\\TaskManager_Utility\\TaskManager_Utility.csproj": {
+              "projectPath": "E:\\Dhaval Projects\\Task_Manager\\TaskManager_Utility\\TaskManager_Utility.csproj"
             }
           }
         }
