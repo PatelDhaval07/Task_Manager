@@ -2625,11 +2625,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "e:\\Nisargbhai\\Task Manager\\Task_Manger_Backend\\TaskManager_DAL\\TaskManager_DAL.csproj",
       "projectName": "TaskManager_DAL",
       "projectPath": "e:\\Nisargbhai\\Task Manager\\Task_Manger_Backend\\TaskManager_DAL\\TaskManager_DAL.csproj",
       "packagesPath": "C:\\Users\\PARTH\\.nuget\\packages\\",
       "outputPath": "e:\\Nisargbhai\\Task Manager\\Task_Manger_Backend\\TaskManager_DAL\\obj\\",
+=======
+      "projectUniqueName": "E:\\Dhaval Projects\\Task_Manager\\TaskManager_DAL\\TaskManager_DAL.csproj",
+      "projectName": "TaskManager_DAL",
+      "projectPath": "E:\\Dhaval Projects\\Task_Manager\\TaskManager_DAL\\TaskManager_DAL.csproj",
+      "packagesPath": "C:\\Users\\Dhaval Patel\\.nuget\\packages\\",
+      "outputPath": "E:\\Dhaval Projects\\Task_Manager\\TaskManager_DAL\\obj\\",
+>>>>>>> 6baeb4e585c85a85bc4f3a48c29e5b012403cca3
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\PARTH\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -2644,11 +2652,19 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
+<<<<<<< HEAD
             "e:\\Nisargbhai\\Task Manager\\Task_Manger_Backend\\TaskManager_Data\\TaskManager_Data.csproj": {
               "projectPath": "e:\\Nisargbhai\\Task Manager\\Task_Manger_Backend\\TaskManager_Data\\TaskManager_Data.csproj"
             },
             "e:\\Nisargbhai\\Task Manager\\Task_Manger_Backend\\TaskManager_Utility\\TaskManager_Utility.csproj": {
               "projectPath": "e:\\Nisargbhai\\Task Manager\\Task_Manger_Backend\\TaskManager_Utility\\TaskManager_Utility.csproj"
+=======
+            "E:\\Dhaval Projects\\Task_Manager\\TaskManager_Data\\TaskManager_Data.csproj": {
+              "projectPath": "E:\\Dhaval Projects\\Task_Manager\\TaskManager_Data\\TaskManager_Data.csproj"
+            },
+            "E:\\Dhaval Projects\\Task_Manager\\TaskManager_Utility\\TaskManager_Utility.csproj": {
+              "projectPath": "E:\\Dhaval Projects\\Task_Manager\\TaskManager_Utility\\TaskManager_Utility.csproj"
+>>>>>>> 6baeb4e585c85a85bc4f3a48c29e5b012403cca3
             }
           }
         }

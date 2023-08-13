@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     // Use IntelliSense to find out which attributes exist for C# debugging
     // Use hover for the description of the existing attributes
     // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
@@ -6,16 +7,32 @@
     "version": "0.2.0",
     "configurations": [
         {
+=======
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // Use IntelliSense to find out which attributes exist for C# debugging
+            // Use hover for the description of the existing attributes
+            // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+>>>>>>> 6baeb4e585c85a85bc4f3a48c29e5b012403cca3
             "name": ".NET Core Launch (web)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/TaskManager_API/bin/Debug/netcoreapp3.1/TaskManager_API.dll",
+<<<<<<< HEAD
             //"program": "${workspaceFolder}/AdaniICMAdminAPI/src/AdaniICMAdminAPI/bin/Debug/netcoreapp3.1/AdaniICMAdminAPI.dll",
             "args": [],
             "cwd": "${workspaceFolder}/TaskManager_API/",
             //"cwd": "${workspaceFolder}/AdaniICMAdminAPI/src/AdaniICMAdminAPI/",
+=======
+            "args": [],
+            "cwd": "${workspaceFolder}/TaskManager_API",
+>>>>>>> 6baeb4e585c85a85bc4f3a48c29e5b012403cca3
             "stopAtEntry": false,
             // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
             "serverReadyAction": {
@@ -27,14 +44,21 @@
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/TaskManager_API/Views"
+<<<<<<< HEAD
                 //"/Views": "${workspaceFolder}/AdaniICMAdminAPI/src/AdaniICMAdminAPI/Views"
+=======
+>>>>>>> 6baeb4e585c85a85bc4f3a48c29e5b012403cca3
             }
         },
         {
             "name": ".NET Core Attach",
             "type": "coreclr",
+<<<<<<< HEAD
             "request": "attach",
             "processId": "${command:pickProcess}"
+=======
+            "request": "attach"
+>>>>>>> 6baeb4e585c85a85bc4f3a48c29e5b012403cca3
         }
     ]
 }

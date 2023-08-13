@@ -7,7 +7,7 @@ namespace TaskManager_Utility.Constant
     public class Common
     {
         public const string NoDataFound = "No data found.";
-        public const string AlreadyExistEmail = "Email id already exist ";
+        public const string AlreadyExistEmail = "Email id already exist";
 
         #region  login
         public const string SomethingWentWrong = "Something went wrong!";

@@ -8,7 +8,10 @@
             "args": [
                 "build",
                 "${workspaceFolder}/TaskManager_API/TaskManager_API.csproj",
+<<<<<<< HEAD
                 //"${workspaceFolder}/AdaniICMAdminAPI/src/AdaniICMAdminAPI/AdaniICMAdminAPI.csproj",
+=======
+>>>>>>> 6baeb4e585c85a85bc4f3a48c29e5b012403cca3
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -21,7 +24,10 @@
             "args": [
                 "publish",
                 "${workspaceFolder}/TaskManager_API/TaskManager_API.csproj",
+<<<<<<< HEAD
                 //"${workspaceFolder}/AdaniICMAdminAPI/src/AdaniICMAdminAPI/AdaniICMAdminAPI.csproj",
+=======
+>>>>>>> 6baeb4e585c85a85bc4f3a48c29e5b012403cca3
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -34,12 +40,19 @@
             "args": [
                 "watch",
                 "run",
+<<<<<<< HEAD
                 "${workspaceFolder}/TaskManager_API/TaskManager_API.csproj",
                 //"${workspaceFolder}/AdaniICMAdminAPI/src/AdaniICMAdminAPI/AdaniICMAdminAPI.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile" //
+=======
+                "--project",
+                "${workspaceFolder}/TaskManager_API/TaskManager_API.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+>>>>>>> 6baeb4e585c85a85bc4f3a48c29e5b012403cca3
         }
     ]
 }
