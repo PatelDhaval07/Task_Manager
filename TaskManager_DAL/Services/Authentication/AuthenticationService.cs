@@ -56,7 +56,7 @@ namespace TaskManager_DAL.Services.Authentication
                     if (dataSet.Tables[0].Rows.Count > 0)
                     {
                         var userDTO = SQLHelper
-                            .ConvertDataTableToGenericList<User>(dataSet.Tables[0])
+                            .ConvertDataTableToGenericList<UserMaster>(dataSet.Tables[0])
                             .FirstOrDefault();
 
                         var isPasswordMatched = PasswordHashUtil.VerifyHashedPassword(
@@ -103,7 +103,7 @@ namespace TaskManager_DAL.Services.Authentication
                         loginResponse.RoleId = userDTO.RoleId.ToString();
                         loginResponse.refreshToken = GenerateRefreshToken();
 
-                        //loginResponse.jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
+                        loginResponse.jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
 
                         return StatusBuilder.ResponseSuccessStatusWithValue(null, loginResponse);
                     }
@@ -117,35 +117,23 @@ namespace TaskManager_DAL.Services.Authentication
             }
         }
 
-        public async Task<object> Register(User user)
+        public async Task<object> Register(UserMaster user)
         {
             try
             {
-                string password =
-                    CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(
-                        DateTime.UtcNow.Month
-                    )
-                    + "@"
-                    + DateTime.UtcNow.Year
-                    + "#";
+                string password = CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(DateTime.UtcNow.Month) + "@" + DateTime.UtcNow.Year + "#";
                 user.Password = PasswordHashUtil.HashPassword(password);
 
                 user.Email = user.Email;
 
-                var response = await Task.Run(
-                    () =>
-                        SQLHelper.ExecuteDataset(
-                            _configuration.GetConnectionString("DefaultConnection"),
-                            "SP_RegisterUser",
-                            new SqlParameter[]
-                            {
-                                    new SqlParameter("@FirstName", user.FirstName),
-                                    new SqlParameter("@LastName", user.LastName),
-                                    new SqlParameter("@Email", user.Email),
-                                    new SqlParameter("@Password", user.Password)
-                            }
-                        )
-                );
+                var response = await Task.Run(() => SQLHelper.ExecuteDataset(_configuration.GetConnectionString("DefaultConnection"), "SP_RegisterUser",
+                    new SqlParameter[]
+                    {
+                        new SqlParameter("@FirstName", user.FirstName),
+                        new SqlParameter("@LastName", user.LastName),
+                        new SqlParameter("@Email", user.Email),
+                        new SqlParameter("@Password", user.Password)
+                    }));
 
                 if (response != null && response.Tables != null && response.Tables[0] != null)
                 {

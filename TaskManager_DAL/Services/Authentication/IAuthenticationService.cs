@@ -10,6 +10,6 @@ namespace TaskManager_DAL.Services.Authentication
     {
         Task<object> Login(Login login);
         Task<object> RefreshToken(Token tokenModel);
-        Task<object> Register(User user);
+        Task<object> Register(UserMaster user);
     }
 }

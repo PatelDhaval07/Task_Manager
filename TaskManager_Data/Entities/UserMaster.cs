@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TaskManager_Data.Entities
 {
-    public class User
+    public class UserMaster
     {
         public int UserId { get; set; }
         public int RoleId { get; set; }

@@ -42,7 +42,7 @@ namespace TaskManager_DAL.Services.CommonService
                     if (dataSet.Tables[0].Rows.Count > 0)
                     {
                         var userDTO = SQLHelper
-                            .ConvertDataTableToGenericList<User>(dataSet.Tables[0])
+                            .ConvertDataTableToGenericList<UserMaster>(dataSet.Tables[0])
                             .FirstOrDefault();
                         string password = CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(DateTime.UtcNow.Month)
            + "@" + DateTime.UtcNow.Year + "#";

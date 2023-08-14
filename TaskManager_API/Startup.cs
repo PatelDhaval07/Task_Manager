@@ -15,6 +15,7 @@ using TaskManager_DAL.Services.Authentication;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TaskManager_DAL.Services.CommonService;
+using TaskManager_DAL.Services.User;
 
 namespace TaskManager_API
 {
@@ -47,6 +48,7 @@ namespace TaskManager_API
             //Register our interface and implemenation
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<ICommonService, CommonService>();
+            services.AddTransient<IUserService, UserService>();
 
             //JWT Bearer
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -74,6 +76,8 @@ namespace TaskManager_API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseAuthentication();
 
             app.UseHttpsRedirection();
 

@@ -49,7 +49,7 @@ namespace TaskManager_API.Controllers
 
         [Route("Register")]
         [HttpPost]
-        public async Task<object> Register(User user)
+        public async Task<object> Register(UserMaster user)
         {
             return await _authenticationService.Register(user);
         }
