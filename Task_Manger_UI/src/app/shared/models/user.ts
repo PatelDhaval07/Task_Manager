@@ -1,13 +1,12 @@
 export class User {
   UserId: any
-  UserName: string = ''
-  FirstName: string = ''
-  MiddleName:string = ''
-  LastName: string = ''
-  Email: string = ''
-  Password: any
-  PhoneNumber: any
+  FirstName: string;
+  LastName: string;
+  Email: string;
+  Password: any;
+  CreatedBy:string;
+  CreatedDate:string;
+  ModifyBy:string;
+  ModifyDate:string;
   IsActive: boolean = true
-  IsLock : boolean = false
-  IsDelete: boolean = false
 }

@@ -42,13 +42,13 @@ export class DashboardComponent implements OnInit {
       data: chartExample2.data
     });
 
-    var chartSales = document.getElementById('chart-sales');
+    // var chartSales = document.getElementById('chart-sales');
 
-    this.salesChart = new Chart(chartSales, {
-			type: 'line',
-			options: chartExample1.options,
-			data: chartExample1.data
-		});
+    // this.salesChart = new Chart(chartSales, {
+		// 	type: 'line',
+		// 	options: chartExample1.options,
+		// 	data: chartExample1.data
+		// });
   }
 
 

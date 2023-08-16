@@ -12,6 +12,7 @@ import { HttpHelper } from '../helper/http.helper'
 import { CommonService } from './common.service'
 import * as Constant from 'src/app/shared/common-constants'
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -41,6 +42,15 @@ export class UserService extends HttpHelper {
   //   map((data: HttpResponse<any>) => { return this.onSucess<any>(data, 'User Register'); }),
   //   catchError((error: HttpErrorResponse) => { return this.onError(error, 'User Registration Failed'); }),
   //   finalize(() => { this.onComplete('User Register'); })
+  //   );
+  // }
+  // UserList(): Observable<any> {
+  //   return this.http.post<any>(`${this.config.Api_Base_Url}${Constant.ValidateUser}`,
+  //   )
+  //   .pipe(
+  //   map((data: HttpResponse<any>) => { return this.onSucess<any>(data, 'Get All User Data'); }),
+  //   catchError((error: HttpErrorResponse) => { return this.onError(error, 'Get All User List Failed'); }),
+  //   finalize(() => { this.onComplete('Get All User Data'); })
   //   );
   // }
 }

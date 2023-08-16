@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { IconsComponent } from '../../pages/icons/icons.component';
 import { MapsComponent } from '../../pages/maps/maps.component';
@@ -11,5 +10,15 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'tables',         component: TablesComponent },
     { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent }
+    { path: 'maps',           component: MapsComponent },
+    {
+        path: 'User',
+        loadChildren: () =>
+          import('./user/user.module').then((mod) => mod.UserModule),
+      },
+      {
+        path: 'Task',
+        loadChildren: () =>
+          import('./task/task.module').then((mod) => mod.TaskModule),
+      },
 ];
