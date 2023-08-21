@@ -1,14 +1,8 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "fg9Hd/JiYd7DDmsBVt35bAzwMP6Qn7MwKbqt/CSOBdoq+DzO6Hei9Q9O3QCLq54y7PfLYHXTRSRtX7TvsDAc7Q==",
   "success": true,
   "projectFilePath": "e:\\Nisargbhai\\Task Manager\\Task_Manger_Backend\\TaskManager_DAL\\TaskManager_DAL.csproj",
-=======
-  "dgSpecHash": "15/hyf9HRSHqEdWB6Jt2iop5WPkHF/8uZTGba1jOlbwkDrKJ4dX1o+3biNzPiUWdWVmc/daY1KwJUlQFGqtmHQ==",
-  "success": true,
-  "projectFilePath": "E:\\Dhaval Projects\\Task_Manager\\TaskManager_DAL\\TaskManager_DAL.csproj",
->>>>>>> 6baeb4e585c85a85bc4f3a48c29e5b012403cca3
   "expectedPackageFiles": [
     "C:\\Users\\PARTH\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "C:\\Users\\PARTH\\.nuget\\packages\\mailkit\\3.3.0\\mailkit.3.3.0.nupkg.sha512",

@@ -1,7 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
     "e:\\Nisargbhai\\Task Manager\\Task_Manger_Backend\\TaskManager_DAL\\TaskManager_DAL.csproj": {}
   },
   "projects": {
@@ -13,19 +12,6 @@
         "projectPath": "e:\\Nisargbhai\\Task Manager\\Task_Manger_Backend\\TaskManager_DAL\\TaskManager_DAL.csproj",
         "packagesPath": "C:\\Users\\PARTH\\.nuget\\packages\\",
         "outputPath": "e:\\Nisargbhai\\Task Manager\\Task_Manger_Backend\\TaskManager_DAL\\obj\\",
-=======
-    "E:\\Dhaval Projects\\Task_Manager\\TaskManager_DAL\\TaskManager_DAL.csproj": {}
-  },
-  "projects": {
-    "E:\\Dhaval Projects\\Task_Manager\\TaskManager_DAL\\TaskManager_DAL.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "E:\\Dhaval Projects\\Task_Manager\\TaskManager_DAL\\TaskManager_DAL.csproj",
-        "projectName": "TaskManager_DAL",
-        "projectPath": "E:\\Dhaval Projects\\Task_Manager\\TaskManager_DAL\\TaskManager_DAL.csproj",
-        "packagesPath": "C:\\Users\\Dhaval Patel\\.nuget\\packages\\",
-        "outputPath": "E:\\Dhaval Projects\\Task_Manager\\TaskManager_DAL\\obj\\",
->>>>>>> 6baeb4e585c85a85bc4f3a48c29e5b012403cca3
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PARTH\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -40,19 +26,11 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-<<<<<<< HEAD
               "e:\\Nisargbhai\\Task Manager\\Task_Manger_Backend\\TaskManager_Data\\TaskManager_Data.csproj": {
                 "projectPath": "e:\\Nisargbhai\\Task Manager\\Task_Manger_Backend\\TaskManager_Data\\TaskManager_Data.csproj"
               },
               "e:\\Nisargbhai\\Task Manager\\Task_Manger_Backend\\TaskManager_Utility\\TaskManager_Utility.csproj": {
                 "projectPath": "e:\\Nisargbhai\\Task Manager\\Task_Manger_Backend\\TaskManager_Utility\\TaskManager_Utility.csproj"
-=======
-              "E:\\Dhaval Projects\\Task_Manager\\TaskManager_Data\\TaskManager_Data.csproj": {
-                "projectPath": "E:\\Dhaval Projects\\Task_Manager\\TaskManager_Data\\TaskManager_Data.csproj"
-              },
-              "E:\\Dhaval Projects\\Task_Manager\\TaskManager_Utility\\TaskManager_Utility.csproj": {
-                "projectPath": "E:\\Dhaval Projects\\Task_Manager\\TaskManager_Utility\\TaskManager_Utility.csproj"
->>>>>>> 6baeb4e585c85a85bc4f3a48c29e5b012403cca3
               }
             }
           }
@@ -134,7 +112,6 @@
         }
       }
     },
-<<<<<<< HEAD
     "e:\\Nisargbhai\\Task Manager\\Task_Manger_Backend\\TaskManager_Data\\TaskManager_Data.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -143,16 +120,6 @@
         "projectPath": "e:\\Nisargbhai\\Task Manager\\Task_Manger_Backend\\TaskManager_Data\\TaskManager_Data.csproj",
         "packagesPath": "C:\\Users\\PARTH\\.nuget\\packages\\",
         "outputPath": "e:\\Nisargbhai\\Task Manager\\Task_Manger_Backend\\TaskManager_Data\\obj\\",
-=======
-    "E:\\Dhaval Projects\\Task_Manager\\TaskManager_Data\\TaskManager_Data.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "E:\\Dhaval Projects\\Task_Manager\\TaskManager_Data\\TaskManager_Data.csproj",
-        "projectName": "TaskManager_Data",
-        "projectPath": "E:\\Dhaval Projects\\Task_Manager\\TaskManager_Data\\TaskManager_Data.csproj",
-        "packagesPath": "C:\\Users\\Dhaval Patel\\.nuget\\packages\\",
-        "outputPath": "E:\\Dhaval Projects\\Task_Manager\\TaskManager_Data\\obj\\",
->>>>>>> 6baeb4e585c85a85bc4f3a48c29e5b012403cca3
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PARTH\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -212,7 +179,6 @@
         }
       }
     },
-<<<<<<< HEAD
     "e:\\Nisargbhai\\Task Manager\\Task_Manger_Backend\\TaskManager_Utility\\TaskManager_Utility.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -221,16 +187,6 @@
         "projectPath": "e:\\Nisargbhai\\Task Manager\\Task_Manger_Backend\\TaskManager_Utility\\TaskManager_Utility.csproj",
         "packagesPath": "C:\\Users\\PARTH\\.nuget\\packages\\",
         "outputPath": "e:\\Nisargbhai\\Task Manager\\Task_Manger_Backend\\TaskManager_Utility\\obj\\",
-=======
-    "E:\\Dhaval Projects\\Task_Manager\\TaskManager_Utility\\TaskManager_Utility.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "E:\\Dhaval Projects\\Task_Manager\\TaskManager_Utility\\TaskManager_Utility.csproj",
-        "projectName": "TaskManager_Utility",
-        "projectPath": "E:\\Dhaval Projects\\Task_Manager\\TaskManager_Utility\\TaskManager_Utility.csproj",
-        "packagesPath": "C:\\Users\\Dhaval Patel\\.nuget\\packages\\",
-        "outputPath": "E:\\Dhaval Projects\\Task_Manager\\TaskManager_Utility\\obj\\",
->>>>>>> 6baeb4e585c85a85bc4f3a48c29e5b012403cca3
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PARTH\\AppData\\Roaming\\NuGet\\NuGet.Config"

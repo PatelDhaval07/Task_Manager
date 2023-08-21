@@ -9,6 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 // import { CommonFunctions } from 'src/app/shared/functions/common.functions';
 // import { CommonService } from 'src/app/shared/services/common.service';
 // import { UserService } from 'src/app/shared/services/user.service';
@@ -26,7 +27,8 @@ import { HomeComponent } from './home/home.component';
   declarations: [
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    ForgotPasswordComponent
   ],
   // providers: [
   //   {
