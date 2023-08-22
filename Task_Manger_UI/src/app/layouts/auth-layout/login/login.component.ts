@@ -1,17 +1,11 @@
-import { Component, Inject, OnInit,OnDestroy } from '@angular/core'
+import { Component, Inject, OnInit, OnDestroy } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import * as Constant from 'src/app/shared/common-constants'
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  FormControl,
-  AbstractControl,
-} from '@angular/forms'
+import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms'
 //import { AppConfig, App_Config } from '../app-config.module'
-//import { UserService } from 'src/app/shared/services/user.service'
+import { UserService } from '.././services/user.service'
 import { User } from 'src/app/shared/models/user'
-//import { CommonFunctions } from 'src/app/shared/functions/common.functions'
+import { CommonFunctions } from 'src/app/shared/functions/common.functions'
 
 
 @Component({
@@ -21,7 +15,7 @@ import { User } from 'src/app/shared/models/user'
 })
 export class LoginComponent implements OnInit {
   AuthToken: any;
-  UserLoginForm : FormGroup = new FormGroup({
+  UserLoginForm: FormGroup = new FormGroup({
     Email: new FormControl(''),
     Password: new FormControl(''),
   })
@@ -32,24 +26,14 @@ export class LoginComponent implements OnInit {
   Submitted = false
   constructor(
     //@Inject(App_Config) private Config: AppConfig,
-  // private UserService: UserService,
+    @Inject(UserService) private userService: UserService,
     private Router: Router,
     private Route: ActivatedRoute,
-  //private CommonFunctions: CommonFunctions,
+    private CommonFunctions: CommonFunctions,
     private FormBuilder: FormBuilder,
-  ) {}
+  ) { }
 
   ngOnInit() {
-    // this.AuthToken = this.Route.snapshot.paramMap.get('auth');
-    // if (this.AuthToken) {
-    //   localStorage.setItem("AuthToken", this.AuthToken);
-    //   this.Router.navigate([Constant.FrontDashboard]);
-    // }
-
-    // if (localStorage.getItem("AuthToken")) {
-    //   this.Router.navigate([Constant.FrontDashboard]);
-    // }
-
     this.UserLoginForm = this.FormBuilder.group({
       Email: [
         '',
@@ -72,40 +56,38 @@ export class LoginComponent implements OnInit {
   get loginFormControl() {
     return this.UserLoginForm.controls
   }
- 
+
   onSubmit() {
-    // this.Submitted = true
-    // //form data post
-    // if (this.UserLoginForm.invalid) {
-    //   return
-    // } else {
-    //   var UserData = new User()
-    //   UserData.Email = this.UserLoginForm.controls['Email'].value
-    //   //UserData.Password = this.UserLoginForm.controls['Password'].value
-    //   this.UserService.ValidateUser(UserData).subscribe(
-    //     (Response) => {
-    //       if (Response.statusCode == Constant.StatusCodeOk && Response.isSuccess == Constant.IsSuccess) {
-    //         if (Response.responseData.UserToken) {
-    //           localStorage.setItem("AuthToken", Response.responseData.UserToken);
-    //           localStorage.setItem("FirstName", Response.responseData.ResultData.firstName);
-    //           localStorage.setItem("LastName", Response.responseData.ResultData.lastName);
-    //           this.CommonFunctions.openSnackBar(Constant.LoginMessage)
-    //           this.Router.navigate(['/Admin/Dashboard']);
-    //         } else {
-    //           this.CommonFunctions.openSnackBar(Response.responseMessage);
-    //         }
-    //       } else {
-    //         this.CommonFunctions.openSnackBar(Response.responseMessage);
-    //       }
-
-    //     },
-    //     (err) => {
-    //       this.Router.navigate(['/Login'])
-    //       this.CommonFunctions.openSnackBar(Constant.CommonErrorMessage);
-    //     }
-
-    //   )
-    // }
+    this.Submitted = true
+    //form data post
+    if (this.UserLoginForm.invalid) {
+      return;
+    } else {
+      var UserData = new User()
+      UserData.Email = this.UserLoginForm.controls['Email'].value
+      UserData.Password = this.UserLoginForm.controls['Password'].value
+      this.userService.Login(UserData).subscribe(
+        (Response: any) => {
+          if (Response.StatusType == Constant.IsSuccess) {
+            if (Response.Data.jwtToken != null) {
+              localStorage.setItem("AuthToken", Response.Data.jwtToken);
+              localStorage.setItem("FirstName", Response.Data.FirstName);
+              localStorage.setItem("LastName", Response.Data.LastName);
+              this.CommonFunctions.openSnackBar(Constant.LoginMessage)
+              this.Router.navigate(['/admin/dashboard']);
+            } else {
+              this.CommonFunctions.openSnackBar(Response.Message);
+            }
+          } else {
+            this.CommonFunctions.openSnackBar(Response.Message);
+          }
+        },
+        (err) => {
+          this.Router.navigate(['/auth/login'])
+          this.CommonFunctions.openSnackBar(Constant.CommonErrorMessage);
+        }
+      )
+    }
   }
 
 }

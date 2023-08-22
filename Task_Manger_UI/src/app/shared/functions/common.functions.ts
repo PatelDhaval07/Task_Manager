@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core'
+import { Inject, Injectable } from '@angular/core'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Subject } from 'rxjs'
 //import * as Constant from 'src/app/shared/common-constants'
 //import { CommonService } from '../services/common.service';
 import { Router } from '@angular/router'
-import { DatePipe } from '@angular/common'
+//import { DatePipe } from '@angular/common'
 //import { User } from '../models/user'
 // @ts-ignore
 import * as CryptoJS from 'crypto-js'
@@ -17,11 +17,11 @@ export class CommonFunctions {
     //    private CommonServices: CommonService,
     private SnackBar: MatSnackBar,
     private Router: Router,
-    private DatePipe: DatePipe,
-  //  private CommonServices: CommonService,
+    //private DatePipe: DatePipe,
+    //  private CommonServices: CommonService,
   ) { }
 
- 
+
 
   //Conmmon function to Show Snackbar messages
   openSnackBar(Message: any) {
@@ -31,7 +31,7 @@ export class CommonFunctions {
     })
   }
 
- 
+
 
   //Logout user if API responce is 401
   // Logout(ErrorStatus: any) {
@@ -47,7 +47,7 @@ export class CommonFunctions {
   //   }
   // }
 
- 
+
 
   //Common Acess Log insert
   // Logging(LogData: any) {
