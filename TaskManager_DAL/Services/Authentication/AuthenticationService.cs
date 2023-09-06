@@ -167,6 +167,95 @@ namespace TaskManager_DAL.Services.Authentication
             }
         }
 
+        public async Task<object> ForgotPassword(string email)
+        {
+            try
+            {
+                var dataSet = await Task.Run(
+                   () =>
+                       SQLHelper.ExecuteDataset(
+                           _configuration.GetConnectionString("DefaultConnection"),
+                           "SP_GetUserDetailsFromEmail",
+                           new SqlParameter[] { new SqlParameter("@Email", email), }
+                       )
+               );
+                if (dataSet != null && dataSet.Tables != null && dataSet.Tables[0] != null)
+                {
+                    if (dataSet.Tables[0].Rows.Count > 0)
+                    {
+                        string password = CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(DateTime.UtcNow.Month) + "@" + DateTime.UtcNow.Year + "#";
+                        //password = PasswordHashUtil.HashPassword(password);
+
+                        string finalTemplate = "Dear Sir/Madam,<br />Your temporary password is " + password + "<br />Regards,<br />TaskFlow";
+                        _iCommonService.SendEmail(finalTemplate, new Dictionary<string, string>(), "Forgot password", email, null);
+                        return StatusBuilder.ResponseSuccessStatus(Common.ForgotPasswordEmailSent);
+                    }
+                }
+                return StatusBuilder.ResponseFailStatus(Common.AuthenticationFailed);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return StatusBuilder.ResponseExceptionStatus(ex);
+            }
+        }
+
+        public async Task<object> ChangePassword(ChangePassword passwordModel)
+        {
+            try
+            {
+                if (passwordModel.OldPassword == passwordModel.NewPassword)
+                    return StatusBuilder.ResponseFailStatus(Common.SameOldNewPassword);
+
+                var dataSet = await Task.Run(
+                  () =>
+                      SQLHelper.ExecuteDataset(
+                          _configuration.GetConnectionString("DefaultConnection"),
+                          "SP_GetUserDetailsFromEmail",
+                          new SqlParameter[] { new SqlParameter("@Email", passwordModel.Email), }
+                      )
+              );
+
+                if (dataSet != null && dataSet.Tables != null && dataSet.Tables[0] != null)
+                {
+                    if (dataSet.Tables[0].Rows.Count > 0)
+                    {
+                        var userDetail = SQLHelper.ConvertDataTableToGenericList<UserMaster>(dataSet.Tables[0]).FirstOrDefault();
+                        var isPasswordMatched = PasswordHashUtil.VerifyHashedPassword(
+                            userDetail.Password,
+                            passwordModel.OldPassword
+                        );
+
+                        if (!isPasswordMatched)
+                            return StatusBuilder.ResponseFailStatus(Common.InvalidOldPassword);
+
+                        string newPassword = PasswordHashUtil.HashPassword(passwordModel.NewPassword);
+
+                        var response = await Task.Run(() => SQLHelper.ExecuteDataset(_configuration.GetConnectionString("DefaultConnection"), "SP_UpdatePassword",
+                    new SqlParameter[]
+                    {
+                        new SqlParameter("@Email", passwordModel.Email),
+                        new SqlParameter("@Password", newPassword)
+                    }));
+
+                        if (response != null && response.Tables != null && response.Tables[0] != null)
+                        {
+                            if (response.Tables[0].Rows.Count > 0 && (int)response.Tables[0].Rows[0][0] < 0)
+                                return StatusBuilder.ResponseFailStatus(Common.FailedToChangePassword);
+                            else
+                                return StatusBuilder.ResponseFailStatus(Common.ChangePasswordSuccessfully);
+                        }
+                        return StatusBuilder.ResponseFailStatus(Common.FailedToChangePassword);
+                    }
+                }
+                return StatusBuilder.ResponseFailStatus(Common.AuthenticationFailed);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return StatusBuilder.ResponseExceptionStatus(ex);
+            }
+        }
         ///Generate Refresh TOken Access
         private static string GenerateRefreshToken()
         {

@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\layouts",
+    "\\src\\app\\layouts\\auth-layout",
+    "\\src\\app\\layouts\\auth-layout\\register",
+    "\\src\\app\\shared",
+    "\\src\\app\\shared\\services",
+    "\\src\\app\\shared\\sidebar",
+    "\\src\\environments"
+  ],
+  "SelectedNode": "\\src\\app\\layouts\\auth-layout\\register\\register.component.ts",
+  "PreviewInSolutionExplorer": false
+}

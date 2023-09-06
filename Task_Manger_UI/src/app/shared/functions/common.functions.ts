@@ -1,6 +1,13 @@
-import { Injectable } from '@angular/core'
+import { Inject, Injectable } from '@angular/core'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Subject } from 'rxjs'
+//import * as Constant from 'src/app/shared/common-constants'
+//import { CommonService } from '../services/common.service';
+import { Router } from '@angular/router'
+//import { DatePipe } from '@angular/common'
+//import { User } from '../models/user'
+// @ts-ignore
+import * as CryptoJS from 'crypto-js'
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +15,9 @@ import { Subject } from 'rxjs'
 export class CommonFunctions {
   constructor(
     private SnackBar: MatSnackBar,
-
+    private Router: Router,
+    //private DatePipe: DatePipe,
+    //  private CommonServices: CommonService,
   ) { }
 
 

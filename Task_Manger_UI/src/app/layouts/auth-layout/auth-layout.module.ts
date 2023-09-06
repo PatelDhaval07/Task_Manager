@@ -14,13 +14,13 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 //import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonFunctions } from 'src/app/shared/functions/common.functions';
 // import { CommonService } from 'src/app/shared/services/common.service';
-// import { UserService } from 'src/app/shared/services/user.service';
+import { UserService } from './services/user.service';
 
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(AuthLayoutRoutes),
+    AuthLayoutRoutes,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
@@ -34,13 +34,12 @@ import { CommonFunctions } from 'src/app/shared/functions/common.functions';
     ForgotPasswordComponent
   ],
   providers: [
-    {
-      provide: LocationStrategy,
-      useClass: PathLocationStrategy,
-    },
-    CommonFunctions,
-    // CommonService,
-    // UserService
+    //{
+    //  provide: LocationStrategy,
+    //  useClass: PathLocationStrategy,
+    //},
+    //CommonFunctions,CommonService,
+    UserService
   ],
 })
 export class AuthLayoutModule { }

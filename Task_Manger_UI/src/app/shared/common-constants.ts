@@ -30,13 +30,14 @@ export const GetAllDropdownMasterList = '/Dropdown/GetAllDropdownMaster';
 export const GetConfigData = "/GetConfigData?configKey=";
 export const GetMenuItems = '/module/GetMenuItems?ComponentId=';
 export const GetAllUser = '/User/GetAllUser';
-export const ValidateUser = "/User/ValidateUser";
+export const ValidateUser = "/authentication/login";
+export const RegisterUser = "/authentication/register";
 export const GetUserDetail = "/User/GetUserDetail";
 export const CommonDelete = '/Commonlist/DeleteData';
 
-export const FrontDashboard = "Admin/Dashboard";
+export const FrontDashboard = "/admin/dashboard";
 export const FrontAuthenticate = "/Authenticate/";
-export const FrontLogin = "/Login";
+export const FrontLogin = "/auth/login";
 export const FrontLogout = "Logout";
 export const FrontLoginRedirection = "/#/Login";
 export const Unauthorized = "/unauthorized";
@@ -61,7 +62,7 @@ export const GetIPAddress = 'https://api.ipify.org?format=json';
 //Status Code 
 export const StatusCodeOk = 200;
 export const StatusCodeUnauthorized = 401;
-export const IsSuccess = true;
+export const IsSuccess = 1;
 
 //Top Menu slug module type = 2
 export const ICMLogoutSlug = 'ICMLogout';

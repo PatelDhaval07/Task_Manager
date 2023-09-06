@@ -51,17 +51,47 @@ namespace TaskManager_API.Controllers
         [HttpPost]
         public async Task<object> Register(UserMaster user)
         {
-            return await _authenticationService.Register(user);
+            try
+            {
+                return await _authenticationService.Register(user);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return StatusBuilder.ResponseExceptionStatus(ex);
+            }
         }
 
-        [Route("Test")]
         [HttpGet]
-        [Authorize]
-        public async Task<object> Test()
+        [Route("ForgotPassword/{email}")]
+        public async Task<object> ForgotPassword(string email)
         {
-            return null;
+            try
+            {
+                return await _authenticationService.ForgotPassword(email);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return StatusBuilder.ResponseExceptionStatus(ex);
+            }
         }
 
+        [HttpPost]
+        [Authorize]
+        [Route("ChangePassword")]
+        public async Task<object> ChangePassword(ChangePassword passwordModel)
+        {
+            try
+            {
+                return await _authenticationService.ChangePassword(passwordModel);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return StatusBuilder.ResponseExceptionStatus(ex);
+            }
+        }
         #endregion
     }
 }

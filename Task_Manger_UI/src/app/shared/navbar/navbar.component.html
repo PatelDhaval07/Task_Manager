@@ -10,7 +10,7 @@
             <span class="input-group-text"><i class="fas fa-search"></i></span>
           </div>
           <input class="form-control" placeholder="Search" type="text" (focus)="focus = true"
-          (blur)="focus = false">
+                 (blur)="focus = false">
         </div>
       </div>
     </form>
@@ -23,7 +23,7 @@
               <img alt="Image placeholder" src="assets/img/theme/team-4-800x800.jpg">
             </span>
             <div class="media-body ml-2 d-none d-lg-block">
-              <span class="mb-0 text-sm  font-weight-bold">Nisarg Shah</span>
+              <span class="mb-0 text-sm  font-weight-bold">{{userName}}</span>
             </div>
           </div>
         </a>
@@ -48,10 +48,10 @@
             <span>Change-Password</span>
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#!" [routerLink]="['/login']" class="dropdown-item">
+          <button (click)="logout()" class="dropdown-item">
             <i class="ni ni-user-run"></i>
             <span>Logout</span>
-          </a>
+          </button>
         </div>
       </li>
     </ul>

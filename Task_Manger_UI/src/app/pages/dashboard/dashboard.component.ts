@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router'
 import Chart from 'chart.js';
+import * as constant from 'src/app/shared/common-constants';
 
 // core components
 import {
@@ -21,8 +23,21 @@ export class DashboardComponent implements OnInit {
   public salesChart;
   public clicked: boolean = true;
   public clicked1: boolean = false;
+  public authToken: string = "";
+
+  constructor(private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.authToken = this.route.snapshot.paramMap.get('authToken');
+    if (this.authToken) {
+      localStorage.setItem("authToken", this.authToken);
+      this.router.navigate([constant.FrontDashboard]);
+    }
+
+    if (localStorage.getItem("authToken")) {
+      this.router.navigate([constant.FrontDashboard]);
+    }
 
     this.datasets = [
       [0, 20, 10, 30, 15, 40, 20, 60, 60],
@@ -45,10 +60,10 @@ export class DashboardComponent implements OnInit {
     // var chartSales = document.getElementById('chart-sales');
 
     // this.salesChart = new Chart(chartSales, {
-		// 	type: 'line',
-		// 	options: chartExample1.options,
-		// 	data: chartExample1.data
-		// });
+    // 	type: 'line',
+    // 	options: chartExample1.options,
+    // 	data: chartExample1.data
+    // });
   }
 
 
