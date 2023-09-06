@@ -12,6 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { SharedModule } from './shared/shared.module';
 import { CommonFunctions } from './shared/functions/common.functions';
+//import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonService } from './shared/services/common.service';
 
 @NgModule({
@@ -24,7 +25,8 @@ import { CommonService } from './shared/services/common.service';
     SharedModule,
     NgbModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+   
   ],
   declarations: [
     AppComponent,

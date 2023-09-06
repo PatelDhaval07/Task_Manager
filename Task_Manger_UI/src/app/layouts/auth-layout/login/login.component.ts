@@ -11,7 +11,9 @@ import {
 //import { AppConfig, App_Config } from '../app-config.module'
 //import { UserService } from 'src/app/shared/services/user.service'
 import { User } from 'src/app/shared/models/user'
-//import { CommonFunctions } from 'src/app/shared/functions/common.functions'
+import { CommonFunctions } from 'src/app/shared/functions/common.functions'
+//import { MatSnackBar } from '@angular/material/snack-bar'
+
 
 
 @Component({
@@ -33,9 +35,10 @@ export class LoginComponent implements OnInit {
   constructor(
     //@Inject(App_Config) private Config: AppConfig,
   // private UserService: UserService,
+  //  private SnackBar: MatSnackBar,
     private Router: Router,
     private Route: ActivatedRoute,
-  //private CommonFunctions: CommonFunctions,
+  private CommonFunctions: CommonFunctions,
     private FormBuilder: FormBuilder,
   ) {}
 
@@ -74,11 +77,12 @@ export class LoginComponent implements OnInit {
   }
  
   onSubmit() {
-    // this.Submitted = true
+     this.Submitted = true
     // //form data post
-    // if (this.UserLoginForm.invalid) {
-    //   return
-    // } else {
+    if (this.UserLoginForm.invalid) {
+      return
+    } else {
+      this.CommonFunctions.openSnackBar('User Login Successful!')
     //   var UserData = new User()
     //   UserData.Email = this.UserLoginForm.controls['Email'].value
     //   //UserData.Password = this.UserLoginForm.controls['Password'].value
@@ -107,5 +111,6 @@ export class LoginComponent implements OnInit {
     //   )
     // }
   }
+}
 
 }
