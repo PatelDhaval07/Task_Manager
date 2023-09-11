@@ -1,54 +1,155 @@
 <div class="header bg-gradient-danger pb-8 pt-3 pt-md-7">
-    <!-- <div class="container-fluid">
-      <div class="header-body">
-        
-      </div>
-    </div> -->
+  <!-- <div class="container-fluid">
+    <div class="header-body">
+
+    </div>
+  </div> -->
 </div>
 <!-- Page content -->
-<div class="container-fluid mt--7">
-    <!-- Table -->
-    <div class="row">
-        <div class="col">
-            <div class="card shadow">
-                <div class="card-header border-0">
-                    <h3 class="mb-0">Task Data</h3>
-                </div>
-                <div class="table-responsive">
-                    <table class="table align-items-center table-flush">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">Task Name</th>
-                                <th scope="col">Company Name</th>
-                                <th scope="col">Partner Name</th>
-                                <th scope="col">Nature Of Work</th>
-                                <th scope="col">User</th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- <tr *ngFor="let task of taskData">
-                                <td>{{ task.taskName }}</td>
-                                <td>{{ task.companyName }}</td>
-                                <td>{{ task.partnerName }}</td>
-                                <td>{{ task.natureOfWork }}</td>
-                                <td>{{ task.userName }}</td>
-                                <button class="btn btn-primary">
-                                    View
-                                </button>
-                                <button class="btn btn-info">
-                                    Edit
-                                </button>
-                                <button class="btn btn-danger">
-                                    Delete
-                                </button>
-                            </tr> -->
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+<!--<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0">Task Data</h3>
         </div>
-    </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Partner Name</th>
+                <th scope="col">Company Name</th>
+                <th scope="col">Company Number</th>
+                <th scope="col">Due Date</th>
+                <th scope="col">Work Nature</th>
+                <th scope="col">Reviewing Person</th>
+                <th scope="col">Record In</th>
+                <th scope="col">Jobs in Planner</th>
+                <th scope="col">Work Start Date</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let task of taskData">
+                <td>{{ task.PartnerName }}</td>
+                <td>{{ task.CompanyName }}</td>
+                <td>{{ task.CompanyNo}}</td>
+                <td>{{ task.DueDate | date:'dd/MM/yyyy'}}</td>
+                <td>{{ task.WorkNature }}</td>
+                <td>{{ task.ReviewingPerson }}</td>
+                <td>{{ task.RecordIn }}</td>
+                <td>{{ task.JobsInPlanner }}</td>
+                <td>{{ task.WorkStartDate | date:'dd/MM/yyyy'}}</td>
+                <td>
+                  <button class="btn btn-primary">
+                    View
+                  </button>
+                  <button class="btn btn-info">
+                    Edit
+                  </button>
+                  <button class="btn btn-danger">
+                    Delete
+                  </button>
+                </td>
+              </tr>
 
-</div>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>-->
+
+<mat-card class="material-table">
+  <mat-card-title class="user-table-wrapper__header">
+    <p class="user-table-wrapper__title">Task list</p>
+    <div class="row">
+      <div class="user-table-wrapper__search col-md-8">
+        <input placeholder="Search Here" matInput autofocus
+               class="user-table-wrapper__search-input" (keyup)="applyFilter($event)">
+      </div>
+      <div class="user-table-wrapper__search col-md-4" style="margin-bottom:15px;">
+        <input id="file" type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;" [multiple]="false" accept=".xlsx">
+        <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+        <label class="ufile_info" for="file" matTooltip="Allowed xlsx only"> Allowed xlsx only </label>
+      </div>
+    </div>
+  </mat-card-title>
+
+  <mat-card-content class="material-table__content">
+    <table mat-table [dataSource]="dataSource" matSort class="user-table__table">
+      <ng-container *ngFor="let column of columns; let i = index;" [matColumnDef]="column.columnDef">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          <mat-form-field class="white_input" *ngIf="column.columnDef == 'PartnerName'">
+            <mat-label>{{column.columnDisplayName}}</mat-label>
+          </mat-form-field>
+
+          <mat-form-field class="white_input" *ngIf="column.columnDef == 'CompanyName'">
+            <mat-label>{{column.columnDisplayName}}</mat-label>
+          </mat-form-field>
+
+          <mat-form-field class="white_input" *ngIf="column.columnDef == 'CompanyNo'">
+            <mat-label>{{column.columnDisplayName}}</mat-label>
+          </mat-form-field>
+
+          <mat-form-field class="white_input" *ngIf="column.columnDef == 'DueDate'">
+            <mat-label>{{column.columnDisplayName}}</mat-label>
+          </mat-form-field>
+
+          <mat-form-field class="white_input" *ngIf="column.columnDef == 'WorkNature'">
+            <mat-label>{{column.columnDisplayName}}</mat-label>
+          </mat-form-field>
+
+          <mat-form-field class="white_input" *ngIf="column.columnDef == 'ReviewingPerson'">
+            <mat-label>{{column.columnDisplayName}}</mat-label>
+          </mat-form-field>
+
+          <mat-form-field class="white_input" *ngIf="column.columnDef == 'RecordIn'">
+            <mat-label>{{column.columnDisplayName}}</mat-label>
+          </mat-form-field>
+
+          <mat-form-field class="white_input" *ngIf="column.columnDef == 'JobsInPlanner'">
+            <mat-label>{{column.columnDisplayName}}</mat-label>
+          </mat-form-field>
+
+          <mat-form-field class="white_input" *ngIf="column.columnDef == 'WorkStartDate'">
+            <mat-label>{{column.columnDisplayName}}</mat-label>
+          </mat-form-field>
+
+          <mat-label *ngIf="column.columnDef == 'IsActive'">{{column.columnDisplayName}}</mat-label>
+          <mat-label *ngIf="column.columnDef == 'Action'">{{column.columnDisplayName}}</mat-label>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <span *ngIf="column.columnDef==='IsActive'">
+            <mat-slide-toggle class="mat-slide-toggle-bar"
+                              [checked]="row[column.columnDef]" [disabled]="false" (change)="ngModifyActivation($event,row)"
+                              matTooltip="Change status">
+            </mat-slide-toggle>
+          </span>
+          <span *ngIf="column.columnDef!=='IsActive' && column.columnDef!=='DueDate' && column.columnDef!=='WorkStartDate'">
+            {{row[column.columnDef]}}
+          </span>
+          <span *ngIf="column.columnDef=='DueDate' || column.columnDef=='WorkStartDate'">
+            {{row[column.columnDef] | date:'dd/MM/yyyy'}}
+          </span>
+
+
+          <button *ngIf="column.columnDef==='Action'" mat-icon-button
+                  matTooltip="Edit" class="iconbutton" color="primary"
+                  [routerLink]="['/customer/edit',row.UserId]">
+            <span class="fa fa-edit"></span>
+          </button>
+
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </mat-card-content>
+</mat-card>

@@ -1,20 +1,16 @@
 export class Task {
-    TaskId: any
-    TaskName: string;
-    CompanyName: string;
-    PartnerName: string;
-    PartnerColour: string;
-    CompanyNumber: string;
-    NextDueDate: string;
-    NatureOfWork: string;
-    ReviewBy: string;
-    RecordIn: boolean;
-    JobsInPlaner: boolean;
-    WorkStartDate: string;
-    CreatedBy: string;
-    CreatedDate: string;
-    TaskStatus: any;
-    ModifyBy: string;
-    ModifyDate: string;
-    IsActive: boolean = true
+  TaskMasterId: number;
+  UserId: number;
+  PartnerName: string;
+  CompanyName: string;
+  CompanyNo: string;
+  DueDate: string;
+  WorkNatureId: number;
+  WorkNature: string;
+  ReviewingUserId: number;
+  ReviewingPerson: string;
+  RecordIn: boolean;
+  JobsInPlanner: boolean;
+  WorkStartDate: string;
+  IsActive: boolean = true;
 }

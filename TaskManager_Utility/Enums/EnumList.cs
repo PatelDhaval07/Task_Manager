@@ -67,16 +67,14 @@ namespace TaskManager_Utility.Enums.EnumList
     }
     #endregion
     #region TicketStatus
-    public enum TicketStatus
+    public enum TaskWorkNature
     {
-        [DescriptionAttribute("Open")]
-        Open = 1,
-        [DescriptionAttribute("Close")]
-        Closed = 2,
-        [DescriptionAttribute("ReOpen")]
-        Reopen = 3,
-        [DescriptionAttribute("In Progress")]
-        InProgress = 4
+        [DescriptionAttribute("Accounts")]
+        Accounts = 1,
+        [DescriptionAttribute("Audit")]
+        Audit = 2,
+        [DescriptionAttribute("Tax")]
+        Tax = 3
     }
     #endregion
 

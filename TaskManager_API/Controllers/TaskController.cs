@@ -6,41 +6,57 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TaskManager_DAL.Services.User;
+using TaskManager_DAL.Services.TaskMaster;
 using TaskManager_Data.Entities;
 using TaskManager_Utility.Helper;
 
 namespace TaskManager_API.Controllers
 {
     [ApiController]
-    [Authorize]
     [Route("api/[controller]")]
     [EnableCors]
-    public class UserController : ControllerBase
+    public class TaskController : ControllerBase
     {
         #region Fields
 
-        private readonly ILogger<UserController> _logger;
-        private readonly IUserService _userService;
+        private readonly ILogger<TaskController> _logger;
+        private readonly ITaskService _taskService;
 
         #endregion
-
-        public UserController(ILogger<UserController> logger, IUserService userService)
-        {
-            _logger = logger;
-            _userService = userService;
-        }
 
         #region Methods
 
+        public TaskController(ILogger<TaskController> logger, ITaskService taskService)
+        {
+            _logger = logger;
+            _taskService = taskService;
+        }
+
+        [Route("GetAllTasks")]
         [HttpGet]
         [Authorize]
-        [Route("GetAllUsers")]
-        public async Task<object> GetAllUsers()
+        public async Task<object> GetAllTasks()
         {
             try
             {
-                return await _userService.GetAllUsers();
+                return await _taskService.GetAllTasks();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return StatusBuilder.ResponseExceptionStatus(ex);
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("UploadTask")]
+        public async Task<object> UploadTasks()
+        {
+            try
+            {
+                var file = Request.Form.Files[0];
+                return await _taskService.UploadTasklist(file);
             }
             catch (Exception ex)
             {
@@ -51,28 +67,12 @@ namespace TaskManager_API.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route("SendRemainder/{email}")]
-        public async Task<object> SendRemainder(string email)
+        [Route("ChangeActiveTask/{TaskMasterId}/{IsActive}")]
+        public async Task<object> ChangeActiveTask(int TaskMasterId, bool IsActive)
         {
             try
             {
-                return await _userService.SendRemainder(email);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogInformation(ex.Message);
-                return StatusBuilder.ResponseExceptionStatus(ex);
-            }
-        }
-
-        [HttpGet]
-        [Authorize]
-        [Route("ChangeActiveUser/{UserMasterId}/{IsActive}")]
-        public async Task<object> ChangeActiveUser(int UserMasterId, bool IsActive)
-        {
-            try
-            {
-                return await _userService.ChangeActiveUser(UserMasterId, IsActive);
+                return await _taskService.ChangeActiveTask(TaskMasterId, IsActive);
             }
             catch (Exception ex)
             {
@@ -82,5 +82,6 @@ namespace TaskManager_API.Controllers
         }
 
         #endregion
+
     }
 }

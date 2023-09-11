@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ClipboardModule } from 'ngx-clipboard';
 import { AdminLayoutRoutes } from './admin-layout.routing';
+import { UserModule } from '../admin-layout/user/user.module';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { IconsComponent } from '../../pages/icons/icons.component';
 import { MapsComponent } from '../../pages/maps/maps.component';
@@ -18,8 +19,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   imports: [
     CommonModule,
+    UserModule,
     AdminLayoutRoutes,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
     ClipboardModule

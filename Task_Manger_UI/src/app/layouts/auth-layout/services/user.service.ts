@@ -1,11 +1,7 @@
-import { HttpClient, HttpErrorResponse, HttpResponse, } from '@angular/common/http'
 import { Inject, Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { catchError, finalize, map } from 'rxjs/operators'
 import { AppConfig, App_Config } from 'src/app/app.config.module'
-import { CommonFunctions } from '../../../shared/functions/common.functions'
 import { HttpHelper } from '../../../shared/helper/http.helper'
-import { CommonService } from '../../../shared/services/common.service';
 import { HttpqService } from '../../../shared/services/httpq.service';
 import * as constant from 'src/app/shared/common-constants'
 
@@ -17,9 +13,6 @@ import * as constant from 'src/app/shared/common-constants'
 )
 export class UserService extends HttpHelper {
   constructor(
-    private http: HttpClient,
-    private CommonFunctions: CommonFunctions,
-    private CommonService: CommonService,
     private httpqService: HttpqService,
     @Inject(App_Config) private config: AppConfig,
   ) {
@@ -34,6 +27,25 @@ export class UserService extends HttpHelper {
     return this.httpqService.postWithoutToken(constant.RegisterUser, UserData);
   }
 
+  ForgotPassword(Email: string): Observable<any> {
+    return this.httpqService.getwithouttoken(constant.ForgotPassword + Email);
+  }
+
+  ChangePassword(ChangePasswordModel: any): Observable<any> {
+    return this.httpqService.post(constant.ChangePassword, ChangePasswordModel);
+  }
+
+  GetUsers(): Observable<any> {
+    return this.httpqService.get(constant.GetAllUsers);
+  }
+
+  SendRemainder(email: string): Observable<any> {
+    return this.httpqService.get(constant.SendRemainder + email);
+  }
+
+  ChangeActivation(userMasterId: number, checked: boolean) {
+    return this.httpqService.get(constant.ChangeUserActivation + userMasterId + '/' + checked);
+  }
   //UserList(): Observable<any> {
   //  return this.http.post<any>(`${this.config.Api_Base_Url}${Constant.ValidateUser}`,
   //  )

@@ -69,10 +69,11 @@ export class LoginComponent implements OnInit {
       this.userService.Login(UserData).subscribe(
         (Response: any) => {
           if (Response.StatusType == Constant.IsSuccess) {
-            if (Response.Data.jwtToken != null) {
-              localStorage.setItem("AuthToken", Response.Data.jwtToken);
+            if (Response.Data.JwtToken != null) {
+              localStorage.setItem("AuthToken", Response.Data.JwtToken);
               localStorage.setItem("FirstName", Response.Data.FirstName);
               localStorage.setItem("LastName", Response.Data.LastName);
+              localStorage.setItem("Email", Response.Data.Email);
               this.CommonFunctions.openSnackBar(Constant.LoginMessage)
               this.Router.navigate(['/admin/dashboard']);
             } else {

@@ -4,13 +4,14 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\layouts",
+    "\\src\\app\\layouts\\admin-layout",
+    "\\src\\app\\layouts\\admin-layout\\user",
+    "\\src\\app\\layouts\\admin-layout\\user\\user-list",
     "\\src\\app\\layouts\\auth-layout",
-    "\\src\\app\\layouts\\auth-layout\\register",
+    "\\src\\app\\layouts\\auth-layout\\services",
     "\\src\\app\\shared",
-    "\\src\\app\\shared\\services",
-    "\\src\\app\\shared\\sidebar",
-    "\\src\\environments"
+    "\\src\\app\\shared\\sidebar"
   ],
-  "SelectedNode": "\\src\\app\\layouts\\auth-layout\\register\\register.component.ts",
+  "SelectedNode": "\\src\\app\\layouts\\admin-layout\\task\\task.module.ts",
   "PreviewInSolutionExplorer": false
 }

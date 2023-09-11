@@ -79,7 +79,7 @@ namespace TaskManager_API.Controllers
 
         [HttpPost]
         [Authorize]
-        [Route("ChangePassword")]
+        [Route("changepassword")]
         public async Task<object> ChangePassword(ChangePassword passwordModel)
         {
             try
@@ -92,6 +92,7 @@ namespace TaskManager_API.Controllers
                 return StatusBuilder.ResponseExceptionStatus(ex);
             }
         }
+
         #endregion
     }
 }

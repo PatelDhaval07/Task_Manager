@@ -76,6 +76,33 @@ export class HttpqService {
     )
   }
 
+  getwithouttoken(resourse: string) {
+    //this.spinner.show();
+    return this.httpClient.get(environment.TaskManagerApiEndpoint + resourse, this.setRequestHeaders()).pipe(
+      map((response: any) => {
+        //this.spinner.hide();
+        if (response.StatusType == constant.IsSuccess) {
+          if (response.Message != null) {
+            this.snackBar.open(response.Message, "Success", { duration: 2000 });
+          }
+          return response;
+        }
+        else if (response.StatusType != constant.IsSuccess) {
+          if (response.Message != null) {
+            this.snackBar.open(response.Message, "Error", { duration: 2000 });
+          }
+          return response;
+        }
+      }),
+      catchError((error: HttpErrorResponse) => {
+        //this.spinner.hide();
+        this.exceptionHandler.handleError(error)
+
+        return of([])
+      })
+    )
+  }
+
   //delete(resourse: string) {
   //  this.spinner.show();
   //  return this.httpClient.delete(environment.apidomain + resourse, this.setRequestHeadersWithToken()).pipe(
@@ -105,6 +132,32 @@ export class HttpqService {
   post(resourse: string, modelData: any) {
     //this.spinner.show();
     return this.httpClient.post(environment.TaskManagerApiEndpoint + resourse, modelData, this.setRequestHeadersWithToken()).pipe(
+      map((response: any) => {
+        //this.spinner.hide();
+        if (response.StatusType == constant.IsSuccess) {
+          if (response.Message != null) {
+            this.snackBar.open(response.Message, "Success", { duration: 2000 });
+          }
+          return response;
+        }
+        else if (response.StatusType != constant.IsSuccess) {
+          if (response.Message != null) {
+            this.snackBar.open(response.Message, "Error", { duration: 2000 });
+          }
+          return response;
+        }
+      }),
+      catchError((error: HttpErrorResponse) => {
+        //this.spinner.hide();
+        this.exceptionHandler.handleError(error);
+        return of([])
+      })
+    )
+  }
+
+  postForUpload(resourse: string, modelData: any) {
+    //this.spinner.show();
+    return this.httpClient.post(environment.TaskManagerApiEndpoint + resourse, modelData, this.setRequestHeadersWithTokenUpload()).pipe(
       map((response: any) => {
         //this.spinner.hide();
         if (response.StatusType == constant.IsSuccess) {

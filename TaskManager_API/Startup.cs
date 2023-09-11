@@ -16,6 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TaskManager_DAL.Services.CommonService;
 using TaskManager_DAL.Services.User;
+using TaskManager_DAL.Services.TaskMaster;
 
 namespace TaskManager_API
 {
@@ -49,6 +50,7 @@ namespace TaskManager_API
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<ICommonService, CommonService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ITaskService, TaskService>();
 
             //JWT Bearer
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -77,15 +79,18 @@ namespace TaskManager_API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseAuthentication();
-
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseCors(builder => builder
+                            .AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader());
 
-            app.UseCors();
+            app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

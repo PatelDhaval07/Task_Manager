@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
 import Chart from 'chart.js';
 import * as constant from 'src/app/shared/common-constants';
+import { UserService } from '../../layouts/auth-layout/services/user.service';
 
 // core components
 import {
@@ -26,17 +27,21 @@ export class DashboardComponent implements OnInit {
   public authToken: string = "";
 
   constructor(private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private userService: UserService) { }
 
   ngOnInit() {
-    this.authToken = this.route.snapshot.paramMap.get('authToken');
+    this.authToken = this.route.snapshot.paramMap.get('AuthToken');
     if (this.authToken) {
-      localStorage.setItem("authToken", this.authToken);
+      localStorage.setItem("AuthToken", this.authToken);
       this.router.navigate([constant.FrontDashboard]);
     }
 
-    if (localStorage.getItem("authToken")) {
+    if (localStorage.getItem("AuthToken")) {
       this.router.navigate([constant.FrontDashboard]);
+    }
+    else {
+      this.router.navigate([constant.FrontLogin]);
     }
 
     this.datasets = [
@@ -64,6 +69,7 @@ export class DashboardComponent implements OnInit {
     // 	options: chartExample1.options,
     // 	data: chartExample1.data
     // });
+
   }
 
 

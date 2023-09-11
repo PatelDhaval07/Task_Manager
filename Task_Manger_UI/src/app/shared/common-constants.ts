@@ -29,19 +29,31 @@ export const UserDetail = '/users/UserDetail';
 export const GetAllDropdownMasterList = '/Dropdown/GetAllDropdownMaster';
 export const GetConfigData = "/GetConfigData?configKey=";
 export const GetMenuItems = '/module/GetMenuItems?ComponentId=';
-export const GetAllUser = '/User/GetAllUser';
 export const ValidateUser = "/authentication/login";
 export const RegisterUser = "/authentication/register";
-export const GetUserDetail = "/User/GetUserDetail";
-export const CommonDelete = '/Commonlist/DeleteData';
+export const ForgotPassword = "/authentication/forgotpassword/";
+export const ChangePassword = "/authentication/changepassword";
+export const GetAllUsers = "/user/GetAllUsers";
+export const SendRemainder = "/user/SendRemainder/";
+export const GetAllTasks = "/task/GetAllTasks";
+export const UploadTasks = "/task/UploadTask";
+export const ChangeTaskActivation = "/task/ChangeActiveTask/";
+export const ChangeUserActivation = "/user/ChangeActiveUser/";
 
 export const FrontDashboard = "/admin/dashboard";
+export const UserList = "/admin/user/userList";
+export const TaskList = "/admin/task/taskList";
 export const FrontAuthenticate = "/Authenticate/";
 export const FrontLogin = "/auth/login";
+export const FrontChangePassword = "/admin/user/changepassword";
 export const FrontLogout = "Logout";
 export const FrontLoginRedirection = "/#/Login";
 export const Unauthorized = "/unauthorized";
 export const Siteundermaintenance = "/siteundermaintenance";
+
+export const INVOICEFILEFORMATES = ['xlsx'];
+export const uploadSizeError = "Error! Select File for less than 20MB";
+export const FILETYPEERROR = 'The file type is invalid. Please select a valid file type.';
 
 //Session Storage related 
 export const Defaultbooleanfalse = false;

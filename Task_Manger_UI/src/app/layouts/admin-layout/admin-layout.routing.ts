@@ -13,12 +13,12 @@ const routes: Routes = [
   { path: 'icons', component: IconsComponent },
   { path: 'maps', component: MapsComponent },
   {
-    path: 'User',
+    path: 'user',
     loadChildren: () =>
       import('./user/user.module').then((mod) => mod.UserModule),
   },
   {
-    path: 'Task',
+    path: 'task',
     loadChildren: () =>
       import('./task/task.module').then((mod) => mod.TaskModule),
   },

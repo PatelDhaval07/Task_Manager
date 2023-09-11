@@ -99,11 +99,12 @@ namespace TaskManager_DAL.Services.Authentication
                         LoginResponse loginResponse = new LoginResponse();
                         loginResponse.FirstName = userDTO.FirstName;
                         loginResponse.LastName = userDTO.LastName;
+                        loginResponse.Email = userDTO.Email;
                         loginResponse.UserId = userDTO.UserId.ToString();
                         loginResponse.RoleId = userDTO.RoleId.ToString();
-                        loginResponse.refreshToken = GenerateRefreshToken();
+                        loginResponse.RefreshToken = GenerateRefreshToken();
 
-                        loginResponse.jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
+                        loginResponse.JwtToken = new JwtSecurityTokenHandler().WriteToken(token);
 
                         return StatusBuilder.ResponseSuccessStatusWithValue(null, loginResponse);
                     }
@@ -186,7 +187,7 @@ namespace TaskManager_DAL.Services.Authentication
                         string password = CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(DateTime.UtcNow.Month) + "@" + DateTime.UtcNow.Year + "#";
                         //password = PasswordHashUtil.HashPassword(password);
 
-                        string finalTemplate = "Dear Sir/Madam,<br />Your temporary password is " + password + "<br />Regards,<br />TaskFlow";
+                        string finalTemplate = "Dear Sir/Madam,<br />Your temporary password is " + password + "<br /><br />Regards,<br />TaskFlow";
                         _iCommonService.SendEmail(finalTemplate, new Dictionary<string, string>(), "Forgot password", email, null);
                         return StatusBuilder.ResponseSuccessStatus(Common.ForgotPasswordEmailSent);
                     }
@@ -243,7 +244,7 @@ namespace TaskManager_DAL.Services.Authentication
                             if (response.Tables[0].Rows.Count > 0 && (int)response.Tables[0].Rows[0][0] < 0)
                                 return StatusBuilder.ResponseFailStatus(Common.FailedToChangePassword);
                             else
-                                return StatusBuilder.ResponseFailStatus(Common.ChangePasswordSuccessfully);
+                                return StatusBuilder.ResponseSuccessStatus(Common.ChangePasswordSuccessfully);
                         }
                         return StatusBuilder.ResponseFailStatus(Common.FailedToChangePassword);
                     }
