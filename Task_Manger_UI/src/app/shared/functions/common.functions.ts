@@ -14,7 +14,6 @@ import * as CryptoJS from 'crypto-js'
 })
 export class CommonFunctions {
   constructor(
-    //    private CommonServices: CommonService,
     private SnackBar: MatSnackBar,
     private Router: Router,
     //private DatePipe: DatePipe,
@@ -25,9 +24,10 @@ export class CommonFunctions {
 
   //Conmmon function to Show Snackbar messages
   openSnackBar(Message: any) {
-    this.SnackBar.open(Message, '', {
+    this.SnackBar.open(Message, 'Done', {
       duration: 3500,
       verticalPosition: 'top',
+      panelClass: 'snackbar'
     })
   }
 

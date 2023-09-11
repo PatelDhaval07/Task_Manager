@@ -6,6 +6,8 @@ import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from
 import { UserService } from '.././services/user.service'
 import { User } from 'src/app/shared/models/user'
 import { CommonFunctions } from 'src/app/shared/functions/common.functions'
+//import { MatSnackBar } from '@angular/material/snack-bar'
+
 
 
 @Component({
@@ -90,5 +92,6 @@ export class LoginComponent implements OnInit {
       )
     }
   }
+}
 
 }
