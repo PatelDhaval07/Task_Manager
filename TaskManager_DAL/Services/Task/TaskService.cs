@@ -84,11 +84,11 @@ namespace TaskManager_DAL.Services.TaskMaster
                             if (workSheet.Cells.Value != null)
                             {
                                 int totalRows = workSheet.Dimension.Rows;
-                                if (workSheet.Cells[1, 1].Value.ToString() == "Company Name" && workSheet.Cells[1, 2].Value.ToString() == "Partner Name"
-                                    && workSheet.Cells[1, 3].Value.ToString() == "Company Number" && workSheet.Cells[1, 4].Value.ToString() == "Due Date"
-                                    && workSheet.Cells[1, 5].Value.ToString() == "Nature of work" && workSheet.Cells[1, 6].Value.ToString() == "Person Reviewing" &&
-                                    workSheet.Cells[1, 7].Value.ToString() == "Record In" && workSheet.Cells[1, 8].Value.ToString() == "Jobs in planner" &&
-                                    workSheet.Cells[1, 9].Value.ToString() == "Work Start Date")
+                                if (workSheet.Cells[1, 1].Value.ToString() == "Task Name" && workSheet.Cells[1, 2].Value.ToString() == "Company Name" && workSheet.Cells[1, 3].Value.ToString() == "Partner Name"
+                                    && workSheet.Cells[1, 4].Value.ToString() == "Company Number" && workSheet.Cells[1, 5].Value.ToString() == "Due Date"
+                                    && workSheet.Cells[1, 6].Value.ToString() == "Nature of work" && workSheet.Cells[1, 7].Value.ToString() == "Person Reviewing" &&
+                                    workSheet.Cells[1, 8].Value.ToString() == "Record In" && workSheet.Cells[1, 9].Value.ToString() == "Jobs in planner" &&
+                                    workSheet.Cells[1, 10].Value.ToString() == "Work Start Date")
                                 {
                                     TaskExcelData taskList = new TaskExcelData();
 
@@ -96,38 +96,35 @@ namespace TaskManager_DAL.Services.TaskMaster
                                     {
                                         //taskList.Add(new TaskExcelData
                                         //{
-                                        if (workSheet.Cells[i, 1].Value != null && workSheet.Cells[i, 2].Value != null && workSheet.Cells[i, 3].Value != null &&
-                                            workSheet.Cells[i, 4].Value != null && workSheet.Cells[i, 5].Value != null && workSheet.Cells[i, 6].Value != null &&
-                                            workSheet.Cells[i, 7].Value != null && workSheet.Cells[i, 8].Value != null && workSheet.Cells[i, 9].Value != null)
-                                        {
-                                            var workNature = (int)((TaskWorkNature)Enum.Parse(typeof(TaskWorkNature), workSheet.Cells[i, 5].Value.ToString()));
-                                            taskList.CompanyName = workSheet.Cells[i, 1].Value.ToString();
-                                            taskList.PartnerName = workSheet.Cells[i, 2].Value.ToString();
-                                            taskList.CompanyNumber = workSheet.Cells[i, 3].Value.ToString();
-                                            taskList.DueDate = Convert.ToDateTime(workSheet.Cells[i, 4].Value);
-                                            taskList.WorkNature = workNature;
-                                            taskList.ReviewingPerson = workSheet.Cells[i, 6].Value.ToString();
-                                            taskList.RecordIn = Convert.ToBoolean(workSheet.Cells[i, 7].Value);
-                                            taskList.JobsInPlanner = Convert.ToBoolean(workSheet.Cells[i, 8].Value);
-                                            taskList.StartDate = Convert.ToDateTime(workSheet.Cells[i, 9].Value);
-                                            //});
+                                        var workNature = workSheet.Cells[i, 6].Value != null ? (int)((TaskWorkNature)Enum.Parse(typeof(TaskWorkNature), workSheet.Cells[i, 6].Value.ToString())) : 0;
+                                        taskList.TaskName = workSheet.Cells[i, 1].Value != null ? workSheet.Cells[i, 1].Value.ToString() : null;
+                                        taskList.CompanyName = workSheet.Cells[i, 2].Value != null ? workSheet.Cells[i, 2].Value.ToString() : null;
+                                        taskList.PartnerName = workSheet.Cells[i, 3].Value != null ? workSheet.Cells[i, 3].Value.ToString() : null;
+                                        taskList.CompanyNumber = workSheet.Cells[i, 4].Value != null ? workSheet.Cells[i, 4].Value.ToString() : null;
+                                        taskList.DueDate = workSheet.Cells[i, 5].Value != null ? workSheet.Cells[i, 5].Value.ToString() : null;
+                                        taskList.WorkNature = workNature != 0 ? workNature.ToString() : null;
+                                        taskList.ReviewingPerson = workSheet.Cells[i, 7].Value != null ? workSheet.Cells[i, 7].Value.ToString() : null;
+                                        taskList.RecordIn = workSheet.Cells[i, 8].Value != null ? workSheet.Cells[i, 8].Value.ToString() : null;
+                                        taskList.JobsInPlanner = workSheet.Cells[i, 9].Value != null ? workSheet.Cells[i, 9].Value.ToString() : null;
+                                        taskList.StartDate = workSheet.Cells[i, 10].Value != null ? workSheet.Cells[i, 10].Value.ToString() : null;
+                                        //});
 
-                                            var response = await Task.Run(() => SQLHelper.ExecuteDataset(_configuration.GetConnectionString("DefaultConnection"), "SP_UploadTasks",
-                                                new SqlParameter[]
-                                                {
+                                        var response = await Task.Run(() => SQLHelper.ExecuteDataset(_configuration.GetConnectionString("DefaultConnection"), "SP_UploadTasks",
+                                            new SqlParameter[]
+                                            {
+                                                new SqlParameter("@TaskName", taskList.TaskName),
                                            new SqlParameter("@CompanyName", taskList.CompanyName),
-                                           new SqlParameter("@PartnerFirstName", taskList.PartnerName.Split(' ')[0]),
-                                           new SqlParameter("@PartnerLastName", taskList.PartnerName.Split(' ')[1]),
+                                           new SqlParameter("@PartnerFirstName", taskList.PartnerName != null? taskList.PartnerName.Split(' ')[0] : null),
+                                           new SqlParameter("@PartnerLastName", taskList.PartnerName != null? taskList.PartnerName.Split(' ')[1] : null),
                                            new SqlParameter("@CompanyNumber", taskList.CompanyNumber),
                                            new SqlParameter("@DueDate", taskList.DueDate),
                                            new SqlParameter("@WorkNatureId", taskList.WorkNature),
-                                           new SqlParameter("@ReviewingPersonFN", taskList.ReviewingPerson.Split(' ')[0]),
-                                           new SqlParameter("@ReviewingPersonLN", taskList.ReviewingPerson.Split(' ')[1]),
+                                           new SqlParameter("@ReviewingPersonFN", taskList.ReviewingPerson !=null  ? taskList.ReviewingPerson.Split(' ')[0] : null),
+                                           new SqlParameter("@ReviewingPersonLN", taskList.ReviewingPerson != null ? taskList.ReviewingPerson.Split(' ')[1] : null),
                                            new SqlParameter("@RecordIn", taskList.RecordIn),
                                            new SqlParameter("@JobsInPlanner", taskList.JobsInPlanner),
                                            new SqlParameter("@StartDate", taskList.StartDate),
-                                                }));
-                                        }
+                                            }));
                                     }
                                     return StatusBuilder.ResponseSuccessStatus(Common.UploadFileSuccessfully);
                                 }
@@ -178,6 +175,55 @@ namespace TaskManager_DAL.Services.TaskMaster
             }
         }
 
+        public async Task<object> AddorUpdateTaskMaster(TasksMaster tasksMaster, string userId)
+        {
+            try
+            {
+                var response = await Task.Run(() => SQLHelper.ExecuteDataset(_configuration.GetConnectionString("DefaultConnection"), "SP_AddorUpdateTask", new SqlParameter[] {
+                new SqlParameter("@TaskMasterId",tasksMaster.TaskMasterId),
+                new SqlParameter("@TaskName",tasksMaster.TaskName),
+                new SqlParameter("@CompanyName",tasksMaster.CompanyName),
+                new SqlParameter("@CompanyNumber",tasksMaster.CompanyNo),
+                new SqlParameter("@PartnerId",tasksMaster.UserId.ToString()),
+                new SqlParameter("@CompanyNumber",tasksMaster.CompanyNo),
+                new SqlParameter("@DueDate",tasksMaster.DueDate.ToString()),
+                new SqlParameter("@WorkNatureId",tasksMaster.WorkNatureId.ToString()),
+                new SqlParameter("@ReviewingUserId",tasksMaster.ReviewingUserId.ToString()),
+                new SqlParameter("@RecordIn",tasksMaster.RecordIn.ToString()),
+                new SqlParameter("@JobsInPlanner",tasksMaster.JobsInPlanner.ToString()),
+                new SqlParameter("@StartDate",tasksMaster.WorkStartDate.ToString()),
+                new SqlParameter("@CreatedBy",Convert.ToInt32(userId)),
+                new SqlParameter("@UpdatedBy",Convert.ToInt32(userId)),
+                }));
+
+                if (response != null && response.Tables != null && response.Tables[0] != null)
+                {
+                    if (response.Tables[0].Rows.Count > 0)
+                    {
+                        if (tasksMaster.TaskMasterId > 0)
+                        {
+                            if ((int)response.Tables[0].Rows[0][0] > 0)
+                                return StatusBuilder.ResponseSuccessStatus(Common.TaskUpdatedSuccessfully);
+                            else
+                                return StatusBuilder.ResponseFailStatus(Common.FailedToUpdateTask);
+                        }
+                        else
+                        {
+                            if ((int)response.Tables[0].Rows[0][0] > 0)
+                                return StatusBuilder.ResponseSuccessStatus(Common.TaskAddedSuccessfully);
+                            else
+                                return StatusBuilder.ResponseFailStatus(Common.FailedToAddTask);
+                        }
+                    }
+                }
+                return StatusBuilder.ResponseFailStatus(null);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return StatusBuilder.ResponseExceptionStatus(ex);
+            }
+        }
         #endregion
     }
 }

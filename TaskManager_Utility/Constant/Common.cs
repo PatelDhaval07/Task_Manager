@@ -33,6 +33,10 @@ namespace TaskManager_Utility.Constant
         public const string ActiveTaskChangeSuccessfully = "Modify task activation successfully";
         public const string FailedToActiveUser = "Failed to modify user activation";
         public const string ActiveUserChangeSuccessfully = "Modify user activation successfully";
+        public const string TaskUpdatedSuccessfully = "Task data updated successfully";
+        public const string FailedToUpdateTask = "Failed to update task data";
+        public const string TaskAddedSuccessfully = "Task data added successfully";
+        public const string FailedToAddTask = "Failed to add task data";
         #endregion
     }
 }

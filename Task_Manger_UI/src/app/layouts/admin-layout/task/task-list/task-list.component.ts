@@ -66,6 +66,9 @@ export class TaskListComponent implements OnInit {
     this.taskService.GetAllTasks().subscribe({
       next: (data: any) => {
         this.taskData = data.Data;
+        //for (var i = 0; i < this.taskData.length; i++) {
+        //  if (this.taskData[i].DueDate)
+        //}
         this.dataSource = new MatTableDataSource<any>(this.taskData);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;

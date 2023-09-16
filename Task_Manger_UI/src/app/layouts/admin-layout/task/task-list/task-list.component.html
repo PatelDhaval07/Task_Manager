@@ -6,95 +6,112 @@
   </div> -->
 </div>
 <!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-6">
+              <h3 class="mb-0">Task Data</h3>
+            </div>
+          </div>
 
-<mat-card class="material-table">
-  <mat-card-title class="user-table-wrapper__header">
-    <p class="user-table-wrapper__title">Task list</p>
-    <div class="row">
-      <div class="user-table-wrapper__search col-md-8">
-        <input placeholder="Search Here" matInput autofocus
-               class="user-table-wrapper__search-input" (keyup)="applyFilter($event)">
-      </div>
-      <div class="user-table-wrapper__search col-md-4" style="margin-bottom:15px;">
-        <input id="file" type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;" [multiple]="false" accept=".xlsx">
-        <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
-        <label class="ufile_info" for="file" matTooltip="Allowed xlsx only"> Allowed xlsx only </label>
+        </div>
+        <div class="card-body">
+          <!--<mat-card class="material-table">-->
+          <!--<mat-card-title class="user-table-wrapper__header">-->
+          <p class="user-table-wrapper__title">Task list</p>
+          <div class="row">
+            <div class="user-table-wrapper__search col-md-8">
+              <input placeholder="Search Here" matInput autofocus style="background:transparent;"
+                     class="user-table-wrapper__search-input" (keyup)="applyFilter($event)">
+            </div>
+            <div class="user-table-wrapper__search col-md-4" style="margin-bottom:15px;">
+              <input id="file" type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;" [multiple]="false" accept=".xlsx">
+              <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+              <!--<label class="ufile_info" for="file" matTooltip="Allowed xlsx only"> Allowed xlsx only </label>-->
+            </div>
+          </div>
+          <!--</mat-card-title>-->
+          <!--<mat-card-content class="material-table__content">-->
+          <table mat-table [dataSource]="dataSource" matSort class="user-table__table">
+            <ng-container *ngFor="let column of columns; let i = index;" [matColumnDef]="column.columnDef">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>
+                <mat-form-field class="white_input" *ngIf="column.columnDef == 'PartnerName'">
+                  <mat-label>{{column.columnDisplayName}}</mat-label>
+                </mat-form-field>
+
+                <mat-form-field class="white_input" *ngIf="column.columnDef == 'CompanyName'">
+                  <mat-label>{{column.columnDisplayName}}</mat-label>
+                </mat-form-field>
+
+                <mat-form-field class="white_input" *ngIf="column.columnDef == 'CompanyNo'">
+                  <mat-label>{{column.columnDisplayName}}</mat-label>
+                </mat-form-field>
+
+                <mat-form-field class="white_input" *ngIf="column.columnDef == 'DueDate'">
+                  <mat-label>{{column.columnDisplayName}}</mat-label>
+                </mat-form-field>
+
+                <mat-form-field class="white_input" *ngIf="column.columnDef == 'WorkNature'">
+                  <mat-label>{{column.columnDisplayName}}</mat-label>
+                </mat-form-field>
+
+                <mat-form-field class="white_input" *ngIf="column.columnDef == 'ReviewingPerson'">
+                  <mat-label>{{column.columnDisplayName}}</mat-label>
+                </mat-form-field>
+
+                <mat-form-field class="white_input" *ngIf="column.columnDef == 'RecordIn'">
+                  <mat-label>{{column.columnDisplayName}}</mat-label>
+                </mat-form-field>
+
+                <mat-form-field class="white_input" *ngIf="column.columnDef == 'JobsInPlanner'">
+                  <mat-label>{{column.columnDisplayName}}</mat-label>
+                </mat-form-field>
+
+                <mat-form-field class="white_input" *ngIf="column.columnDef == 'WorkStartDate'">
+                  <mat-label>{{column.columnDisplayName}}</mat-label>
+                </mat-form-field>
+
+                <mat-label *ngIf="column.columnDef == 'IsActive'">{{column.columnDisplayName}}</mat-label>
+                <mat-label *ngIf="column.columnDef == 'Action'">{{column.columnDisplayName}}</mat-label>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                <span *ngIf="column.columnDef==='IsActive'">
+                  <mat-slide-toggle class="mat-slide-toggle-bar"
+                                    [checked]="row[column.columnDef]" [disabled]="false" (change)="ngModifyActivation($event,row)"
+                                    matTooltip="Change status">
+                  </mat-slide-toggle>
+                </span>
+                <span *ngIf="column.columnDef!=='IsActive' && column.columnDef!=='DueDate' && column.columnDef!=='WorkStartDate'">
+                  {{row[column.columnDef]}}
+                </span>
+                <span *ngIf="column.columnDef=='DueDate' || column.columnDef=='WorkStartDate'">
+                  {{row[column.columnDef] | date:'dd/MM/yyyy'}}
+                </span>
+
+
+                <button *ngIf="column.columnDef==='Action'" mat-icon-button
+                        matTooltip="Edit" class="iconbutton" color="primary"
+                        [routerLink]="['/customer/edit',row.UserId]">
+                  <span class="fa fa-edit"></span>
+                </button>
+
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;">
+            </mat-row>
+
+          </table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+          </mat-paginator>
+          <!--/mat-card-content>
+          </mat-card>-->
+        </div>
       </div>
     </div>
-  </mat-card-title>
-
-  <mat-card-content class="material-table__content">
-    <table mat-table [dataSource]="dataSource" matSort class="user-table__table">
-      <ng-container *ngFor="let column of columns; let i = index;" [matColumnDef]="column.columnDef">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>
-          <mat-form-field class="white_input" *ngIf="column.columnDef == 'PartnerName'">
-            <mat-label>{{column.columnDisplayName}}</mat-label>
-          </mat-form-field>
-
-          <mat-form-field class="white_input" *ngIf="column.columnDef == 'CompanyName'">
-            <mat-label>{{column.columnDisplayName}}</mat-label>
-          </mat-form-field>
-
-          <mat-form-field class="white_input" *ngIf="column.columnDef == 'CompanyNo'">
-            <mat-label>{{column.columnDisplayName}}</mat-label>
-          </mat-form-field>
-
-          <mat-form-field class="white_input" *ngIf="column.columnDef == 'DueDate'">
-            <mat-label>{{column.columnDisplayName}}</mat-label>
-          </mat-form-field>
-
-          <mat-form-field class="white_input" *ngIf="column.columnDef == 'WorkNature'">
-            <mat-label>{{column.columnDisplayName}}</mat-label>
-          </mat-form-field>
-
-          <mat-form-field class="white_input" *ngIf="column.columnDef == 'ReviewingPerson'">
-            <mat-label>{{column.columnDisplayName}}</mat-label>
-          </mat-form-field>
-
-          <mat-form-field class="white_input" *ngIf="column.columnDef == 'RecordIn'">
-            <mat-label>{{column.columnDisplayName}}</mat-label>
-          </mat-form-field>
-
-          <mat-form-field class="white_input" *ngIf="column.columnDef == 'JobsInPlanner'">
-            <mat-label>{{column.columnDisplayName}}</mat-label>
-          </mat-form-field>
-
-          <mat-form-field class="white_input" *ngIf="column.columnDef == 'WorkStartDate'">
-            <mat-label>{{column.columnDisplayName}}</mat-label>
-          </mat-form-field>
-
-          <mat-label *ngIf="column.columnDef == 'IsActive'">{{column.columnDisplayName}}</mat-label>
-          <mat-label *ngIf="column.columnDef == 'Action'">{{column.columnDisplayName}}</mat-label>
-        </mat-header-cell>
-        <mat-cell *matCellDef="let row">
-          <span *ngIf="column.columnDef==='IsActive'">
-            <mat-slide-toggle class="mat-slide-toggle-bar"
-                              [checked]="row[column.columnDef]" [disabled]="false" (change)="ngModifyActivation($event,row)"
-                              matTooltip="Change status">
-            </mat-slide-toggle>
-          </span>
-          <span *ngIf="column.columnDef!=='IsActive' && column.columnDef!=='DueDate' && column.columnDef!=='WorkStartDate'">
-            {{row[column.columnDef]}}
-          </span>
-          <span *ngIf="column.columnDef=='DueDate' || column.columnDef=='WorkStartDate'">
-            {{row[column.columnDef] | date:'dd/MM/yyyy'}}
-          </span>
-
-
-          <button *ngIf="column.columnDef==='Action'" mat-icon-button
-                  matTooltip="Edit" class="iconbutton" color="primary"
-                  [routerLink]="['/customer/edit',row.UserId]">
-            <span class="fa fa-edit"></span>
-          </button>
-
-        </mat-cell>
-      </ng-container>
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;">
-      </mat-row>
-
-    </table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
-    </mat-paginator>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using TaskManager_Data.Entities;
 
 namespace TaskManager_DAL.Services.TaskMaster
 {
@@ -11,5 +12,6 @@ namespace TaskManager_DAL.Services.TaskMaster
         Task<object> GetAllTasks();
         Task<object> UploadTasklist(IFormFile file);
         Task<object> ChangeActiveTask(int TaskMasterId, bool IsActive);
+        Task<object> AddorUpdateTaskMaster(TasksMaster tasksMaster, string userId);
     }
 }
