@@ -35,4 +35,11 @@ export class TaskService extends HttpHelper {
     return this.httpqService.get(constant.ChangeTaskActivation + taskMasterId + '/' + checked);
   }
 
+  GetTaskDetail(taskMasterId: string) {
+    return this.httpqService.get(constant.GetTaskDetail + taskMasterId);
+  }
+
+  AddorUpdateTask(taskData: any) {
+    return this.httpqService.post(constant.AddorUpdateTask, taskData);
+  }
 }

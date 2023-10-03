@@ -20,6 +20,7 @@ namespace TaskManager_Data.Entities
         public bool RecordIn { get; set; }
         public bool JobsInPlanner { get; set; }
         public DateTime WorkStartDate { get; set; }
+        public int Status { get; set; }
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
         public int CreatedBy { get; set; }

@@ -32,6 +32,7 @@
               <input id="file" type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;" [multiple]="false" accept=".xlsx">
               <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
               <!--<label class="ufile_info" for="file" matTooltip="Allowed xlsx only"> Allowed xlsx only </label>-->
+              <button type="button" class="btn btn-success" (click)="addTask()">Add</button>
             </div>
           </div>
           <!--</mat-card-title>-->
@@ -95,7 +96,7 @@
 
                 <button *ngIf="column.columnDef==='Action'" mat-icon-button
                         matTooltip="Edit" class="iconbutton" color="primary"
-                        [routerLink]="['/customer/edit',row.UserId]">
+                        [routerLink]="['/admin/task/taskOperation/edit',row.TaskMasterId]">
                   <span class="fa fa-edit"></span>
                 </button>
 
