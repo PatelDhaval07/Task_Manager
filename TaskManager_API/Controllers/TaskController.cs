@@ -3,11 +3,9 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using TaskManager_DAL.Services.Task;
+using TaskManager_DAL.Services.TaskMaster;
 using TaskManager_Data.Entities;
 using TaskManager_Utility.Helper;
 
@@ -101,5 +99,57 @@ namespace TaskManager_API.Controllers
         }
         #endregion
 
+        [HttpGet]
+        [Authorize]
+        [Route("GetTaskFromId/{TaskMasterId}")]
+        public async Task<object> GetTaskFromId(int TaskMasterId)
+        {
+            try
+            {
+                return await _taskService.GetTaskFromId(TaskMasterId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return StatusBuilder.ResponseExceptionStatus(ex);
+                throw;
+            }
+        }
+
+        [HttpGet]
+        [Authorize]
+        [Route("GetStatusCount")]
+        public async Task<object> GetStatusCount()
+        {
+            try
+            {
+                string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                return await _taskService.GetStatusCount(userId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return StatusBuilder.ResponseExceptionStatus(ex);
+                throw;
+            }
+        }
+
+        [HttpGet]
+        [Authorize]
+        [Route("GetTaskFromUserId")]
+        public async Task<object> GetTaskFromUserId()
+        {
+            try
+            {
+                string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                return await _taskService.GetTaskFromUserId(userId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return StatusBuilder.ResponseExceptionStatus(ex);
+                throw;
+            }
+        }
     }
 }

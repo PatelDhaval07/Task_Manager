@@ -14,6 +14,7 @@ using System.IO;
 using OfficeOpenXml;
 using TaskManager_Utility.Constant;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace TaskManager_DAL.Services.TaskMaster
 {
@@ -175,7 +176,7 @@ namespace TaskManager_DAL.Services.TaskMaster
             }
         }
 
-        public async Task<object> AddorUpdateTaskMaster(TasksMaster tasksMaster, string userId)
+        public async Task<object> AddorUpdateTaskMaster(TasksMaster tasksMaster, string usersId)
         {
             try
             {
@@ -183,17 +184,17 @@ namespace TaskManager_DAL.Services.TaskMaster
                 new SqlParameter("@TaskMasterId",tasksMaster.TaskMasterId),
                 new SqlParameter("@TaskName",tasksMaster.TaskName),
                 new SqlParameter("@CompanyName",tasksMaster.CompanyName),
+                new SqlParameter("@PartnerId",tasksMaster.UserId),
                 new SqlParameter("@CompanyNumber",tasksMaster.CompanyNo),
-                new SqlParameter("@PartnerId",tasksMaster.UserId.ToString()),
-                new SqlParameter("@CompanyNumber",tasksMaster.CompanyNo),
-                new SqlParameter("@DueDate",tasksMaster.DueDate.ToString()),
-                new SqlParameter("@WorkNatureId",tasksMaster.WorkNatureId.ToString()),
-                new SqlParameter("@ReviewingUserId",tasksMaster.ReviewingUserId.ToString()),
-                new SqlParameter("@RecordIn",tasksMaster.RecordIn.ToString()),
-                new SqlParameter("@JobsInPlanner",tasksMaster.JobsInPlanner.ToString()),
-                new SqlParameter("@StartDate",tasksMaster.WorkStartDate.ToString()),
-                new SqlParameter("@CreatedBy",Convert.ToInt32(userId)),
-                new SqlParameter("@UpdatedBy",Convert.ToInt32(userId)),
+                new SqlParameter("@DueDate",tasksMaster.DueDate),
+                new SqlParameter("@WorkNatureId",tasksMaster.WorkNatureId),
+                new SqlParameter("@ReviewingUserId",tasksMaster.ReviewingUserId),
+                new SqlParameter("@RecordIn",Convert.ToInt32(tasksMaster.RecordIn)),
+                new SqlParameter("@JobsInPlanner",Convert.ToInt32(tasksMaster.JobsInPlanner)),
+                new SqlParameter("@StartDate",tasksMaster.WorkStartDate),
+                new SqlParameter("@Status",tasksMaster.Status),
+                new SqlParameter("@CreatedBy",Convert.ToInt32(usersId)),
+                new SqlParameter("@UpdatedBy",Convert.ToInt32(usersId)),
                 }));
 
                 if (response != null && response.Tables != null && response.Tables[0] != null)
@@ -224,6 +225,73 @@ namespace TaskManager_DAL.Services.TaskMaster
                 return StatusBuilder.ResponseExceptionStatus(ex);
             }
         }
+
+        public async Task<object> GetTaskFromId(int taskMasterId)
+        {
+            try
+            {
+                var response = await Task.Run(() => SQLHelper.ExecuteDataset(_configuration.GetConnectionString("DefaultConnection"), "SP_GetTaskFromId", new SqlParameter[] {
+                new SqlParameter("@TaskMasterId",taskMasterId)
+                }));
+
+                if (response != null && response.Tables != null && response.Tables[0] != null)
+                {
+                    var taskDetail = SQLHelper.ConvertDataTableToGenericList<TasksMaster>(response.Tables[0]).FirstOrDefault();
+                    return StatusBuilder.ResponseSuccessStatusWithValue(null, taskDetail);
+                }
+                return StatusBuilder.ResponseFailStatus(Common.SomethingWentWrong);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return StatusBuilder.ResponseExceptionStatus(ex);
+            }
+        }
+
+        public async Task<object> GetStatusCount(string userId)
+        {
+            try
+            {
+                var response = await Task.Run(() => SQLHelper.ExecuteDataset(_configuration.GetConnectionString("DefaultConnection"), "SP_GetStatusCountByUser", new SqlParameter[] {
+                new SqlParameter("@UserId",Convert.ToInt32(userId))
+                }));
+
+                if (response != null && response.Tables != null && response.Tables[0] != null)
+                {
+                    List<int> statusData = (from dr in response.Tables[0].AsEnumerable() select dr.Field<int>("StatusCount")).ToList<int>();
+                    return StatusBuilder.ResponseSuccessStatusWithValue(null, statusData);
+                }
+                return StatusBuilder.ResponseFailStatus(Common.SomethingWentWrong);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return StatusBuilder.ResponseExceptionStatus(ex);
+            }
+        }
+
+        public async Task<object> GetTaskFromUserId(string userId)
+        {
+            try
+            {
+                var response = await Task.Run(() => SQLHelper.ExecuteDataset(_configuration.GetConnectionString("DefaultConnection"), "SP_GetTaskFromUserId", new SqlParameter[] {
+                new SqlParameter("@UserId",Convert.ToInt32(userId))
+                }));
+
+                if (response != null && response.Tables != null && response.Tables[0] != null)
+                {
+                    var taskDetail = SQLHelper.ConvertDataTableToGenericList<TasksMaster>(response.Tables[0]).ToList();
+                    return StatusBuilder.ResponseSuccessStatusWithValue(null, taskDetail);
+                }
+                return StatusBuilder.ResponseFailStatus(Common.SomethingWentWrong);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return StatusBuilder.ResponseExceptionStatus(ex);
+            }
+        }
+
         #endregion
     }
 }

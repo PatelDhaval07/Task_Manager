@@ -142,4 +142,8 @@ export class TaskListComponent implements OnInit {
       this.commonFunctions.openSnackBar(constant.FILETYPEERROR);
     }
   }
+
+  addTask() {
+    this.router.navigate([constant.AddTask]);
+  }
 }

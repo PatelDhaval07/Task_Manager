@@ -39,10 +39,13 @@ export const GetAllTasks = "/task/GetAllTasks";
 export const UploadTasks = "/task/UploadTask";
 export const ChangeTaskActivation = "/task/ChangeActiveTask/";
 export const ChangeUserActivation = "/user/ChangeActiveUser/";
+export const GetTaskDetail = "/task/GetTaskFromId/";
+export const AddorUpdateTask = "/task/AddorUpdateTaskMaster";
 
 export const FrontDashboard = "/admin/dashboard";
 export const UserList = "/admin/user/userList";
 export const TaskList = "/admin/task/taskList";
+export const AddTask = "/admin/task/taskOperation/add";
 export const FrontAuthenticate = "/Authenticate/";
 export const FrontLogin = "/auth/login";
 export const FrontChangePassword = "/admin/user/changepassword";

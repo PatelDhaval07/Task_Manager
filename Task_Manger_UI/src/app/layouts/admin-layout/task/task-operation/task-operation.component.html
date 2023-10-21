@@ -1,171 +1,147 @@
 <div class="header bg-gradient-danger pb-8 pt-3 pt-md-7">
-    <!-- <div class="container-fluid">
-      <div class="header-body">
-        
-      </div>
-    </div> -->
+  <!-- <div class="container-fluid">
+    <div class="header-body">
+
+    </div>
+  </div> -->
 </div>
 <!-- Page content -->
 <div class="container-fluid mt--7">
-    <!-- Table -->
-    <div class="row">
-        <div class="col">
-            <div class="card bg-secondary shadow">
-                <form [formGroup]="TaskForm">
-                <div class="card-header bg-white border-0">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                          <h3 class="mb-0">{{Label}} Task Data</h3>
-                        </div>
-                        <div class="col-6 text-right">
-                          <a type="submit" name="submit" *ngIf="IsDisabled==false" (click)="onSubmit()" class="btn btn-primary">Submit</a>
-                          <a href="Task/taskList" class="btn btn-light">Cancel</a>
-                        </div>
-                      </div>
-                     
-                </div>
-                <div class="card-body">
-                   
-                      <h6 class="heading-small text-muted mb-4">Task information</h6>
-                      <div class="pl-lg-4">
-                        <div class="row">
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              <label class="form-control-label">Task Name</label>
-                              <input type="text" formControlName="TaskName" class="form-control form-control-alternative" placeholder="Task Name"
-                              [ngClass]="{ 'is-invalid': Submitted && taskFormControl['TaskName'].errors }">
-                              <div *ngIf="Submitted && taskFormControl['TaskName'].errors" class="invalid-feedback">
-                                <div *ngIf="taskFormControl['TaskName'].errors['required']">
-                                 Task Name is required
-                                </div>
-                              </div>
-                            </div>
-                         </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label class="form-control-label">Company Name</label>
-                                    <input type="text" formControlName="CompanyName" class="form-control form-control-alternative" placeholder="Company Name"
-                                    [ngClass]="{ 'is-invalid': Submitted && taskFormControl['CompanyName'].errors }">
-                                    <div *ngIf="Submitted && taskFormControl['CompanyName'].errors" class="invalid-feedback">
-                                      <div *ngIf="taskFormControl['CompanyName'].errors['required']">
-                                        Company Name is required
-                                      </div>
-                                    </div>
-                              </div>
-                            </div>
-                            <div class="col-lg-4">
-                              <div class="form-group">
-                                <label class="form-control-label">Company Number</label>
-                                <input type="text" formControlName="CompanyNumber" class="form-control form-control-alternative" placeholder="Company Number"
-                                [ngClass]="{ 'is-invalid': Submitted && taskFormControl['CompanyNumber'].errors }">
-                                    <div *ngIf="Submitted && taskFormControl['CompanyNumber'].errors" class="invalid-feedback">
-                                      <div *ngIf="taskFormControl['CompanyNumber'].errors['required']">
-                                        Company Number is required
-                                      </div>
-                                    </div>
-                              </div>
-                            </div>  
-                          </div>
-                       
-                        <div class="row">
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              <label class="form-control-label">Partner Name</label>
-                              <select name="PartnerName" class="form-control" placeholder="Partner Name"  formControlName="PartnerName">
-                                <option selected>Select Partner</option>
-                                <option value="Developing">Developing</option>
-                                <option value="coding">coding</option>
-                                <option value="Testing">Testing</option>
-                                <option value="Designing">Designing</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              <label class="form-control-label">Next Due Date </label>
-                              <input type="date" formControlName="NextDueDate" class="form-control form-control-alternative" placeholder="Next Due Date">
-                            
-                            </div>
-                          </div>
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              <label class="form-control-label">Nature Of Work </label>
-                              <select name="NatureOfWork" class="form-control" formControlName="NatureOfWork">
-                                <option selected>Select Nature Of Work</option>
-                                <option value="Developing">Developing</option>
-                                <option value="coding">coding</option>
-                                <option value="Testing">Testing</option>
-                                <option value="Designing">Designing</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                              <div class="form-group">
-                                <label class="form-control-label">Review By</label>
-                                <select name="ReviewBy" class="form-control" formControlName="ReviewBy">
-                                    <option selected>Select User</option>
-                                    <option value="Developing">Developing</option>
-                                    <option value="coding">coding</option>
-                                    <option value="Testing">Testing</option>
-                                    <option value="Designing">Designing</option>
-                                </select>
-                              </div>
-                            </div>
-                            <div class="col-lg-4">
-                              <div class="form-group">
-                                <label class="form-control-label">Record In </label>
-                                <select name="RecordIn" class="form-control" formControlName="RecordIn">
-                                    <option value="YES"selected>YES</option>
-                                    <option value="NO">NO</option>
-                                    
-                                </select>
-                              
-                              </div>
-                            </div>
-                            <div class="col-lg-4">
-                              <div class="form-group">
-                                <label class="form-control-label">Jobs In Planer </label>
-                                <select name="JobsInPlaner" class="form-control" formControlName="JobsInPlaner">
-                                    <option value="YES"selected>YES</option>
-                                    <option value="NO">NO</option>
-                                    
-                                </select>
-                              
-                              </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                              <div class="form-group">
-                                <label class="form-control-label">Work Start Date</label>                               
-                                <input type="date" formControlName="WorkStartDate" class="form-control form-control-alternative" placeholder="Work Start Date" >                               
-                              </div>
-                            </div>
-                            <div class="col-lg-4">
-                              <div class="form-group">
-                                <label class="form-control-label">Status </label>
-                                <select name="Status" class="form-control" placeholder="Status" formControlName="Status">
-                                    <option value="Open" selected>Open</option>
-                                    <option value="InProgress">InProgress</option>
-                                    <option value="Pending">Pending</option>
-                                    <option value="Done">Done</option>
-                                </select>
-
-                              
-                              </div>
-                            </div>
-                           
-                        </div>
-                      </div>
-                    
-                
-                   
-                  </div>
-                </form>
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card bg-secondary shadow">
+        <form [formGroup]="TaskForm">
+          <div class="card-header bg-white border-0">
+            <div class="row align-items-center">
+              <div class="col-6">
+                <h3 class="mb-0">{{Label}} Task Data</h3>
+              </div>
+              <div class="col-6 text-right">
+                <a type="submit" name="submit" *ngIf="IsDisabled==false" (click)="onSubmit()" class="btn btn-primary">Submit</a>
+                <a href="/admin/task/taskList" class="btn btn-light">Cancel</a>
+              </div>
             </div>
-        </div>
+
+          </div>
+          <div class="card-body">
+
+            <h6 class="heading-small text-muted mb-4">Task information</h6>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label">Task Name</label>
+                    <input type="text" formControlName="TaskName" class="form-control form-control-alternative" placeholder="Task Name">
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label">Company Name</label>
+                    <input type="text" formControlName="CompanyName" class="form-control form-control-alternative" placeholder="Company Name">
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label">Company Number</label>
+                    <input type="text" formControlName="CompanyNumber" class="form-control form-control-alternative" placeholder="Company Number">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label">Partner Name</label>
+                    <select name="PartnerName" class="form-control" placeholder="Partner Name" formControlName="PartnerName">
+                      <option selected value="0">Select Partner</option>
+                      <option *ngFor="let item of UserListData" [value]="item.UserId">{{item.FirstName}} {{item.LastName}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label">Next Due Date </label>
+                    <input type="date" formControlName="NextDueDate" class="form-control form-control-alternative" placeholder="Next Due Date">
+
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label">Nature Of Work </label>
+                    <select name="NatureOfWork" class="form-control" formControlName="NatureOfWork">
+                      <option selected>Select Nature Of Work</option>
+                      <option value="1">Accounts</option>
+                      <option value="2">Audit</option>
+                      <option value="3">Tax</option>
+                      <option value="Designing">Designing</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label">Review By</label>
+                    <select name="ReviewBy" class="form-control" formControlName="ReviewBy">
+                      <option selected value="0">Select Reviewing User</option>
+                      <option *ngFor="let item of UserListData" [value]="item.UserId">{{item.FirstName}} {{item.LastName}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label">Record In </label>
+                    <select name="RecordIn" class="form-control" formControlName="RecordIn">
+                      <option value="true" selected>YES</option>
+                      <option value="false">NO</option>
+
+                    </select>
+
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label">Jobs In Planner </label>
+                    <select name="JobsInPlanner" class="form-control" formControlName="JobsInPlanner">
+                      <option value="true" selected>YES</option>
+                      <option value="false">NO</option>
+
+                    </select>
+
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label">Work Start Date</label>
+                    <input type="date" formControlName="WorkStartDate" class="form-control form-control-alternative" placeholder="Work Start Date">
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label">Status </label>
+                    <select name="Status" class="form-control" placeholder="Status" formControlName="Status">
+                      <option value="0" selected>Select Status</option>
+                      <option value="1">Open</option>
+                      <option value="2">InProgress</option>
+                      <option value="3">Done</option>
+                    </select>
+
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 
 </div>
