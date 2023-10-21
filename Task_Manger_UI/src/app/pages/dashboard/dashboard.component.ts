@@ -21,6 +21,8 @@ export class DashboardComponent implements OnInit {
 
   public datasets: any;
   public data: any;
+  ctx : any;
+  config : any;
   public salesChart;
   public clicked: boolean = true;
   public clicked1: boolean = false;
@@ -56,11 +58,11 @@ export class DashboardComponent implements OnInit {
     parseOptions(Chart, chartOptions());
 
 
-    var ordersChart = new Chart(chartOrders, {
-      type: 'bar',
-      options: chartExample2.options,
-      data: chartExample2.data
-    });
+    // var ordersChart = new Chart(chartOrders, {
+    //   type: 'bar',
+    //   options: chartExample2.options,
+    //   data: chartExample2.data
+    // });
 
     // var chartSales = document.getElementById('chart-sales');
 
@@ -69,7 +71,43 @@ export class DashboardComponent implements OnInit {
     // 	options: chartExample1.options,
     // 	data: chartExample1.data
     // });
-
+    
+    const data = {
+      labels: [
+        'Closed',
+        'Open',
+        'InProgress',
+        'Reopen',
+      ],
+      options : {
+      },
+      datasets: [{
+        label: 'My First Dataset',
+        data: [2, 3, 1, 2],
+        backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 205, 86)',
+          'rgb(82, 255, 160)'
+        ],
+        hoverOffset: 4
+      }]
+    };
+    // </block:setup>
+    
+    // <block:config:0>
+    this.config = {
+      type: 'pie',
+      data: data,
+    };
+    // </block:config>
+    
+    // module.exports = {
+    //   actions: [],
+    //   config: config,
+    // };
+    this.ctx = document.getElementById('myChart');
+    const myChart = new Chart(this.ctx, this.config);
   }
 
 
