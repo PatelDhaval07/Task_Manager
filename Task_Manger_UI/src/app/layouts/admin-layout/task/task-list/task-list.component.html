@@ -22,13 +22,12 @@
         <div class="card-body">
           <!--<mat-card class="material-table">-->
           <!--<mat-card-title class="user-table-wrapper__header">-->
-          <p class="user-table-wrapper__title">Task list</p>
           <div class="row">
-            <div class="user-table-wrapper__search col-md-8">
-              <input placeholder="Search Here" matInput autofocus style="background:transparent;"
+            <div class="user-table-wrapper__search col-md-10">
+              <input placeholder="Search Tasks Here..." matInput autofocus style="background:transparent;"
                      class="user-table-wrapper__search-input" (keyup)="applyFilter($event)">
             </div>
-            <div class="user-table-wrapper__search col-md-4" style="margin-bottom:15px;">
+            <div class="user-table-wrapper__search col-md-2" style="margin-bottom:12px;">
               <input id="file" type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;" [multiple]="false" accept=".xlsx">
               <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
               <!--<label class="ufile_info" for="file" matTooltip="Allowed xlsx only"> Allowed xlsx only </label>-->
@@ -92,13 +91,17 @@
                 <span *ngIf="column.columnDef=='DueDate' || column.columnDef=='WorkStartDate'">
                   {{row[column.columnDef] | date:'dd/MM/yyyy'}}
                 </span>
+                <span *ngIf="column.columnDef==='Action'" style="font-size: 25px; color: rgb(33, 98, 220);"
+                [routerLink]="['/customer/edit',row.UserId]">
+               <i class="bi bi-pencil-fill"></i>
+              </span>
 
-
+<!-- 
                 <button *ngIf="column.columnDef==='Action'" mat-icon-button
                         matTooltip="Edit" class="iconbutton" color="primary"
                         [routerLink]="['/admin/task/taskOperation/edit',row.TaskMasterId]">
                   <span class="fa fa-edit"></span>
-                </button>
+                </button> -->
 
               </mat-cell>
             </ng-container>

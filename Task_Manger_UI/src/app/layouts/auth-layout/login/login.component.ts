@@ -70,6 +70,7 @@ export class LoginComponent implements OnInit {
       UserData.Password = this.UserLoginForm.controls['Password'].value
       this.userService.Login(UserData).subscribe(
         (Response: any) => {
+          console.log(Response)
           if (Response.StatusType == Constant.IsSuccess) {
             if (Response.Data.JwtToken != null) {
               localStorage.setItem("AuthToken", Response.Data.JwtToken);

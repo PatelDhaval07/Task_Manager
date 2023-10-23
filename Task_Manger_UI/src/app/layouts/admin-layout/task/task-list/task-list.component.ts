@@ -21,17 +21,17 @@ export class TaskListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   columns = [
-    { columnDisplayName: 'Partner Name', columnDef: 'PartnerName', header: 'Partner Name' },
-    { columnDisplayName: 'Company Name', columnDef: 'CompanyName', header: 'Company Name' },
-    { columnDisplayName: 'Company Number', columnDef: 'CompanyNo', header: 'Company Number' },
+    { columnDisplayName: 'Partner', columnDef: 'PartnerName', header: 'Partner Name' },
+    { columnDisplayName: 'Company ', columnDef: 'CompanyName', header: 'Company Name' },
+    // { columnDisplayName: 'Company Number', columnDef: 'CompanyNo', header: 'Company Number' },
     { columnDisplayName: 'Due Date', columnDef: 'DueDate', header: 'Due Date' },
     { columnDisplayName: 'Work Nature', columnDef: 'WorkNature', header: 'Work Nature' },
-    { columnDisplayName: 'Reviewing Person', columnDef: 'ReviewingPerson', header: 'Reviewing Person' },
+    { columnDisplayName: 'User', columnDef: 'ReviewingPerson', header: 'Reviewing Person' },
     { columnDisplayName: 'Record In', columnDef: 'RecordIn', header: 'Record In' },
     { columnDisplayName: 'Jobs In Planner', columnDef: 'JobsInPlanner', header: 'Jobs In Planner' },
-    { columnDisplayName: 'Work Start Date', columnDef: 'WorkStartDate', header: 'Work Start Date' },
+    { columnDisplayName: 'Start Date', columnDef: 'WorkStartDate', header: 'Work Start Date' },
     { columnDisplayName: 'Active', columnDef: 'IsActive', header: 'Active' },
-    { columnDisplayName: 'Action', columnDef: 'Action', header: 'Action' },
+    { columnDisplayName: 'Actions', columnDef: 'Action', header: 'Action' },
   ];
 
   NoRecordFound = "No Record Found";
