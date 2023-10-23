@@ -1,11 +1,10 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser'
-import { LocationStrategy, PathLocationStrategy } from '@angular/common'
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
@@ -30,7 +29,7 @@ import { AppConfig, App_Config } from './app.config.module';
     NgbModule,
     RouterModule,
     AppRoutingModule,
-    AuthLayoutModule
+    AuthLayoutModule,
   ],
   declarations: [
     AppComponent,
@@ -41,6 +40,8 @@ import { AppConfig, App_Config } from './app.config.module';
     {
       provide: App_Config, useValue: AppConfig
     },
+    //{ provide: LOCALE_ID, useValue: 'en-US' },
+    //{ provide: MOMENT, useValue: moment },
     //{
     //  provide: LocationStrategy,
     //  useClass: PathLocationStrategy,

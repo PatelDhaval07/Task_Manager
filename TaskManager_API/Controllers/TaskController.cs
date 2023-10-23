@@ -55,7 +55,8 @@ namespace TaskManager_API.Controllers
             try
             {
                 var file = Request.Form.Files[0];
-                return await _taskService.UploadTasklist(file);
+                string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                return await _taskService.UploadTasklist(file,userId);
             }
             catch (Exception ex)
             {

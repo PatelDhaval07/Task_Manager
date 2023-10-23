@@ -62,7 +62,7 @@ namespace TaskManager_DAL.Services.TaskMaster
             }
         }
 
-        public async Task<object> UploadTasklist(IFormFile file)
+        public async Task<object> UploadTasklist(IFormFile file, string userId)
         {
             try
             {
@@ -125,6 +125,7 @@ namespace TaskManager_DAL.Services.TaskMaster
                                            new SqlParameter("@RecordIn", taskList.RecordIn),
                                            new SqlParameter("@JobsInPlanner", taskList.JobsInPlanner),
                                            new SqlParameter("@StartDate", taskList.StartDate),
+                                           new SqlParameter("@CreatedBy", userId),
                                             }));
                                     }
                                     return StatusBuilder.ResponseSuccessStatus(Common.UploadFileSuccessfully);
