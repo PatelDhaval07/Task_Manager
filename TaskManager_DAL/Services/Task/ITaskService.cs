@@ -16,5 +16,6 @@ namespace TaskManager_DAL.Services.TaskMaster
         Task<object> GetTaskFromId(int taskMasterId);
         Task<object> GetStatusCount(string userId);
         Task<object> GetTaskFromUserId(string userId);
+        Task<object> GetAllCalendarTask(int userId);
     }
 }

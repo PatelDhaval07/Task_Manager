@@ -56,7 +56,7 @@ namespace TaskManager_API.Controllers
             {
                 var file = Request.Form.Files[0];
                 string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                return await _taskService.UploadTasklist(file,userId);
+                return await _taskService.UploadTasklist(file, userId);
             }
             catch (Exception ex)
             {
@@ -144,6 +144,23 @@ namespace TaskManager_API.Controllers
             {
                 string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 return await _taskService.GetTaskFromUserId(userId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return StatusBuilder.ResponseExceptionStatus(ex);
+                throw;
+            }
+        }
+
+        [HttpGet]
+        [Authorize]
+        [Route("GetAllCalendarTask/{userId}")]
+        public async Task<object> GetAllCalendarTask(int userId)
+        {
+            try
+            {
+                return await _taskService.GetAllCalendarTask(userId);
             }
             catch (Exception ex)
             {

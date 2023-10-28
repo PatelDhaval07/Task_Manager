@@ -1,32 +1,11 @@
-import { ChangeDetectorRef, Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation, Inject, LOCALE_ID, HostListener } from '@angular/core';
-import { Subject } from 'rxjs';
-
-//import {
-//  endOfDay,
-//  addMonths
-//} from 'date-fns';
-//import {
-//  DAYS_IN_WEEK,
-//  SchedulerViewDay,
-//  SchedulerViewHour,
-//  SchedulerViewHourSegment,
-//  CalendarSchedulerEvent,
-//  CalendarSchedulerEventAction,
-//  startOfPeriod,
-//  endOfPeriod,
-//  addPeriod,
-//  subPeriod,
-//  SchedulerDateFormatter,
-//  SchedulerEventTimesChangedEvent
-//} from 'angular-calendar-scheduler';
-//import {
-//  CalendarView,
-//  CalendarDateFormatter,
-//  DateAdapter
-//} from 'angular-calendar';
-import { CalendarOptions, EventSourceInput } from '@fullcalendar/core';
+import { Component, OnInit, LOCALE_ID, ChangeDetectorRef } from '@angular/core';
+import { formatDate } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
+import { CalendarOptions, DateSelectArg, EventApi, EventClickArg, EventSourceInput } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import { TaskService } from 'src/app/shared/services/task.service';
+import * as constant from 'src/app/shared/common-constants';
 
 @Component({
   selector: 'app-calendartasks',
@@ -36,17 +15,19 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 
 export class CalendartasksComponent implements OnInit {
 
-  title = 'Angular Calendar Scheduler Demo';
+  calendarEvents: any = [];
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     headerToolbar: {
       left: "prev,next today",
-      center: "title",
-      /*right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"*/
-      right: "dayGridMonth"
+      right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
+      //right: "dayGridMonth"
     },
+    weekends: true,
     editable: true,
-    droppable: true,
+    selectable: true,
+    selectMirror: true,
+    dayMaxEvents: true,
     plugins: [dayGridPlugin, interactionPlugin],
     events: [
       { title: 'event 1', date: '2023-10-01', color: 'red' },
@@ -54,12 +35,28 @@ export class CalendartasksComponent implements OnInit {
     ],
   };
   eventsPromise: Promise<EventSourceInput>;
+  authToken: string = '';
+  eventGuid = 0;
+  calendarVisible = true;
 
-
-  constructor() {
+  constructor(private route: ActivatedRoute, private changeDetector: ChangeDetectorRef,
+    private router: Router, private taskService: TaskService) {
   }
 
   ngOnInit(): void {
+    this.authToken = this.route.snapshot.paramMap.get('AuthToken');
+    if (this.authToken) {
+      localStorage.setItem("AuthToken", this.authToken);
+      this.router.navigate([constant.TaskList]);
+    }
+
+    if (localStorage.getItem("AuthToken")) {
+      this.router.navigate([constant.TaskList]);
+    }
+    else {
+      this.router.navigate([constant.FrontLogin]);
+    }
+
   }
 
 }

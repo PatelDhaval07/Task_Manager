@@ -42,4 +42,8 @@ export class TaskService extends HttpHelper {
   AddorUpdateTask(taskData: any) {
     return this.httpqService.post(constant.AddorUpdateTask, taskData);
   }
+
+  GetCalendarTasks(userId: number) {
+    return this.httpqService.get(constant.GetCalendarTasks + userId);
+  }
 }

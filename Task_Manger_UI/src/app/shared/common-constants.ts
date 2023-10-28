@@ -41,6 +41,7 @@ export const ChangeTaskActivation = "/task/ChangeActiveTask/";
 export const ChangeUserActivation = "/user/ChangeActiveUser/";
 export const GetTaskDetail = "/task/GetTaskFromId/";
 export const AddorUpdateTask = "/task/AddorUpdateTaskMaster";
+export const GetCalendarTasks = "/task/GetAllCalendarTask/";
 
 export const FrontDashboard = "/admin/dashboard";
 export const UserList = "/admin/user/userList";

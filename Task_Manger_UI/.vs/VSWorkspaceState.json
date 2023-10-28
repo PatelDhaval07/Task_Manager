@@ -6,10 +6,13 @@
     "\\src\\app\\layouts",
     "\\src\\app\\layouts\\admin-layout",
     "\\src\\app\\layouts\\admin-layout\\task",
-    "\\src\\app\\layouts\\admin-layout\\task\\calendartasks",
+    "\\src\\app\\layouts\\admin-layout\\task\\task-list",
+    "\\src\\app\\pages",
+    "\\src\\app\\pages\\dashboard",
     "\\src\\app\\shared",
-    "\\src\\app\\shared\\models"
+    "\\src\\app\\shared\\services",
+    "\\src\\environments"
   ],
-  "SelectedNode": "\\src\\app\\layouts\\admin-layout\\admin-layout.module.ts",
+  "SelectedNode": "\\src\\app\\layouts\\admin-layout\\task\\calendartasks\\calendartasks.component.ts",
   "PreviewInSolutionExplorer": false
 }
