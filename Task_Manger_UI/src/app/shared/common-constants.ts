@@ -40,6 +40,8 @@ export const UploadTasks = "/task/UploadTask";
 export const ChangeTaskActivation = "/task/ChangeActiveTask/";
 export const ChangeUserActivation = "/user/ChangeActiveUser/";
 export const GetTaskDetail = "/task/GetTaskFromId/";
+export const GetTaskFromUserId = "/Task/GetTaskFromUserId";
+export const GetStatusCount = "/Task/GetStatusCount";
 export const AddorUpdateTask = "/task/AddorUpdateTaskMaster";
 export const GetCalendarTasks = "/task/GetAllCalendarTask/";
 

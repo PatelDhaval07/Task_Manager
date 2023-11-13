@@ -26,6 +26,13 @@ export class TaskService extends HttpHelper {
   GetAllTasks() {
     return this.httpqService.get(constant.GetAllTasks);
   }
+  GetTasksByUserId() {
+    return this.httpqService.get(constant.GetTaskFromUserId);
+  }
+
+  GetStatusCount() {
+    return this.httpqService.get(constant.GetStatusCount);
+  }
 
   UploadTasks(formData: any) {
     return this.httpqService.postForUpload(constant.UploadTasks, formData);
