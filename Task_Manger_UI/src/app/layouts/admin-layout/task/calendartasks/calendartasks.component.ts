@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CalendarOptions, DateSelectArg, EventApi, EventClickArg, EventSourceInput } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import timegridPlugin from '@fullcalendar/timegrid';
 import { TaskService } from 'src/app/shared/services/task.service';
 import * as constant from 'src/app/shared/common-constants';
 
@@ -16,10 +17,13 @@ import * as constant from 'src/app/shared/common-constants';
 export class CalendartasksComponent implements OnInit {
 
   calendarEvents: any = [];
+  //title: string = "Dhaval";
   calendarOptions: CalendarOptions = {
-    initialView: 'dayGridMonth',
+    initialView: 'timeGridWeek',
     headerToolbar: {
+      center: 'title',
       left: "prev,next today",
+      //right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
       right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
       //right: "dayGridMonth"
     },
@@ -28,11 +32,7 @@ export class CalendartasksComponent implements OnInit {
     selectable: true,
     selectMirror: true,
     dayMaxEvents: true,
-    plugins: [dayGridPlugin, interactionPlugin],
-    events: [
-      { title: 'event 1', date: '2023-10-01', color: 'red' },
-      { title: 'event 2', date: '2023-10-05', color: 'red' }
-    ],
+    plugins: [dayGridPlugin, interactionPlugin, timegridPlugin],
   };
   eventsPromise: Promise<EventSourceInput>;
   authToken: string = '';
@@ -57,6 +57,24 @@ export class CalendartasksComponent implements OnInit {
       this.router.navigate([constant.FrontLogin]);
     }
 
+    this.retrieveData();
   }
 
+  retrieveData(): void {
+    debugger
+    this.taskService.GetCalendarTasks(0).subscribe({
+      next: (data: any) => {
+        for (var i = 0; i < data.Data.CalendarTasks.length; i++) {
+          this.calendarEvents.push({
+            title: data.Data.CalendarTasks[i].TaskName,
+            date: formatDate(data.Data.CalendarTasks[i].DueDate, 'yyyy-MM-dd', 'en-US'),
+            color: data.Data.CalendarTasks[i].ColourName,
+          });
+        }
+
+        this.calendarOptions.events = this.calendarEvents;
+      },
+      error: (e) => console.error(e),
+    })
+  }
 }

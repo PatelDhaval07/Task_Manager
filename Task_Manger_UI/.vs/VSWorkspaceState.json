@@ -6,9 +6,7 @@
     "\\src\\app\\layouts",
     "\\src\\app\\layouts\\admin-layout",
     "\\src\\app\\layouts\\admin-layout\\task",
-    "\\src\\app\\layouts\\admin-layout\\task\\task-list",
-    "\\src\\app\\pages",
-    "\\src\\app\\pages\\dashboard",
+    "\\src\\app\\layouts\\admin-layout\\task\\calendartasks",
     "\\src\\app\\shared",
     "\\src\\app\\shared\\services",
     "\\src\\environments"
