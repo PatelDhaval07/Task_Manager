@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  TaskManagerApiEndpoint: 'https://localhost:5001/api',
+  TaskManagerApiEndpoint: 'http://localhost:47038/api',
 };
 
 /*

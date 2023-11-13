@@ -43,6 +43,7 @@ export const GetTaskDetail = "/task/GetTaskFromId/";
 export const GetTaskFromUserId = "/Task/GetTaskFromUserId";
 export const GetStatusCount = "/Task/GetStatusCount";
 export const AddorUpdateTask = "/task/AddorUpdateTaskMaster";
+export const GetCalendarTasks = "/task/GetAllCalendarTask/";
 
 export const FrontDashboard = "/admin/dashboard";
 export const UserList = "/admin/user/userList";

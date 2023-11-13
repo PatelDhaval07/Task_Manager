@@ -10,13 +10,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TaskRoutingModule } from './task-routing.module';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskOperationComponent } from './task-operation/task-operation.component';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CalendartasksComponent } from './calendartasks/calendartasks.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
     TaskListComponent,
-    TaskOperationComponent
+    TaskOperationComponent,
+    CalendartasksComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,9 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
     MatSlideToggleModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserModule,
+    FullCalendarModule
   ]
 })
 export class TaskModule { }

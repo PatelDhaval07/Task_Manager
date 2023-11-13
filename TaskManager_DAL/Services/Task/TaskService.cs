@@ -62,7 +62,7 @@ namespace TaskManager_DAL.Services.TaskMaster
             }
         }
 
-        public async Task<object> UploadTasklist(IFormFile file)
+        public async Task<object> UploadTasklist(IFormFile file, string userId)
         {
             try
             {
@@ -125,6 +125,7 @@ namespace TaskManager_DAL.Services.TaskMaster
                                            new SqlParameter("@RecordIn", taskList.RecordIn),
                                            new SqlParameter("@JobsInPlanner", taskList.JobsInPlanner),
                                            new SqlParameter("@StartDate", taskList.StartDate),
+                                           new SqlParameter("@CreatedBy", userId),
                                             }));
                                     }
                                     return StatusBuilder.ResponseSuccessStatus(Common.UploadFileSuccessfully);
@@ -292,6 +293,31 @@ namespace TaskManager_DAL.Services.TaskMaster
             }
         }
 
+        public async Task<object> GetAllCalendarTask(int userId)
+        {
+            try
+            {
+                var response = await Task.Run(() => SQLHelper.ExecuteDataset(_configuration.GetConnectionString("DefaultConnection"), "SP_GetAllCalendarTaskFromUserId", new SqlParameter[] {
+                new SqlParameter("@UserId",userId)
+                }));
+
+                if (response != null && response.Tables != null && response.Tables[0] != null)
+                {
+                    dynamic calendarTasks = new Dictionary<string, dynamic>();
+                    var tasks = SQLHelper.ConvertDataTableToGenericList<CalendarTasks>(response.Tables[0]).ToList();
+                    var unassignedTasks = SQLHelper.ConvertDataTableToGenericList<UnassignedTasks>(response.Tables[1]).ToList();
+                    calendarTasks.Add("CalendarTasks", tasks);
+                    calendarTasks.Add("UnassignedTasks", unassignedTasks);
+                    return StatusBuilder.ResponseSuccessStatusWithValue(null, calendarTasks);
+                }
+                return StatusBuilder.ResponseFailStatus(Common.SomethingWentWrong);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return StatusBuilder.ResponseExceptionStatus(ex);
+            }
+        }
         #endregion
     }
 }
